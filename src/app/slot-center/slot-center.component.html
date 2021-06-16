@@ -1,0 +1,74 @@
+<!-- <app-announcement></app-announcement>
+<app-member-board></app-member-board> -->
+<div class="slot-wrap">
+  <div class="slot-header">
+    <div class="tags">
+      <ul>
+        <li
+          class="all"
+          [class.active]="gameTag == enumGameTags.all"
+          (click)="changeGameTag(enumGameTags.all)"
+        >
+          <i></i>{{ "GameTag.ALL" | translate }}
+        </li>
+        <li
+          class="hot"
+          [class.active]="gameTag == enumGameTags.hot"
+          (click)="changeGameTag(enumGameTags.hot)"
+        >
+          <i></i>{{ "GameTag.HOT" | translate }}
+        </li>
+        <li
+          class="fav"
+          [class.active]="gameTag == enumGameTags.fav"
+          (click)="changeGameTag(enumGameTags.fav)"
+        >
+          <i></i>{{ "GameTag.FAV" | translate }}
+        </li>
+        <li
+          *ngFor="let item of tagsMap | keyvalue"
+          [class.active]="gameTag == item.key"
+          (click)="changeGameTag(item.key)"
+        >
+          {{ item.value }}
+        </li>
+      </ul>
+    </div>
+    <div class="search-box">
+      <i></i>
+      <input
+        type="search"
+        #search
+        placeholder="{{ 'GameTag.search' | translate }}"
+      />
+    </div>
+  </div>
+  <div class="game-list">
+    <div
+      class="game-contain"
+      *ngFor="
+        let game of showItems
+          | gametags: gameTag:favorites
+          | searchGame: search.value
+      "
+      (click)="clickGame(game, $event)"
+    >
+      <app-maintain-tip [item]="game"></app-maintain-tip>
+      <div
+        class="pic"
+        [style.background-image]="'url(' + game.imageUrl + ')'"
+      ></div>
+      <p>
+        <span>{{ game.name }}</span>
+
+        <button
+          class="favor-icon"
+          (click)="favClick(game.id)"
+          [class.active]="isFav(game.id)"
+        >
+          <i></i>
+        </button>
+      </p>
+    </div>
+  </div>
+</div>

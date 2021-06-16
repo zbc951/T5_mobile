@@ -1,0 +1,104 @@
+<div class="scroll-wrap">
+  <p class="empty-data" *ngIf="records.length == 0">
+    {{ "NO_DATA" | translate }}
+  </p>
+  <div class="record-table">
+    <ul
+      *ngFor="
+        let item of records
+          | paginate
+            : {
+                itemsPerPage: itemsPerPage,
+                currentPage: currentPage,
+                totalItems: totalItems,
+                id:'amount-record'
+              }
+      "
+    >
+      <li class="header">
+        <p class="no">{{ "MEMBER_WITHDRAW.record_th.no" | translate }}</p>
+        <p>{{ item.serial_num }}</p>
+      </li>
+      <li>
+        <p>{{ "MEMBER_WITHDRAW.record_th.status" | translate }}</p>
+        <p>{{ translationsRecordType[item.type] }}</p>
+      </li>
+      <li>
+        <p>{{ "MEMBER_WITHDRAW.record_th.val" | translate }}</p>
+        <p>{{ item.amount }}</p>
+      </li>
+      <li>
+        <p>{{ "MEMBER_WITHDRAW.record_th.limit" | translate }}</p>
+        <p>{{ item.water_limit }}</p>
+      </li>
+      <li>
+        <p>{{ "MEMBER_WITHDRAW.record_th.shift" | translate }}</p>
+        <p class="wShift">{{ item.current_water }}</p>
+      </li>
+      <li>
+        <p>{{ "MEMBER_WITHDRAW.record_th.unlock" | translate }}</p>
+        <p>{{ item.is_unlock }}</p>
+      </li>
+      <li>
+        <p>{{ "MEMBER_WITHDRAW.record_th.date" | translate }}</p>
+        <p>{{ item.created_at }}</p>
+      </li>
+      <!-- <li>
+      <p>{{ "MEMBER_WITHDRAW.record_th.op" | translate }}</p>
+      <p>{{ item.editor }}</p>
+    </li> -->
+
+      <li class="wPs">
+        <div>
+          <p>
+            {{ "MEMBER_WITHDRAW.record_th.ps" | translate }}
+          </p>
+          <p class="ps-cnt">
+            {{ item.remark }}
+          </p>
+        </div>
+      </li>
+      <li class="btns">
+        <button
+          class="d-btn"
+          [disabled]="!item.backfill_count"
+          (click)="openDrawBack(item)"
+        >
+          {{ "MEMBER_WITHDRAW.record_th.drawback" | translate }}
+        </button>
+        <button
+          class="b-btn"
+          [disabled]="!item.report_count"
+          (click)="openBetlist(item)"
+        >
+          {{ "MEMBER_WITHDRAW.record_th.bethistory" | translate }}
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div class="page-block" *ngIf="records.length != 0">
+    <pagination-controls
+      (pageChange)="pageChanged($event)"
+      class="pagination"
+      autoHide="true"
+      previousLabel=""
+      nextLabel=""
+      id="amount-record"
+      >
+    </pagination-controls>
+    <p>
+      {{
+        "PAGEINFO"
+          | translate: { totalItems: totalItems, itemsPerPage: itemsPerPage }
+      }}
+    </p>
+  </div>
+</div>
+<app-drawback
+  *ngIf="isDrawbackShow"
+  (closeEvt)="closePopup($event)"
+></app-drawback>
+<app-withdraw-bet-record
+  *ngIf="isBetRecordShow"
+  (closeEvt)="closePopup($event)"
+></app-withdraw-bet-record>

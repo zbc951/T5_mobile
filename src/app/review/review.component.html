@@ -1,0 +1,100 @@
+<div class="scroll-wrap" appList (gotBottom)="onBtm($event)">
+  <div class="search-contain">
+    <!-- <form [formGroup]="form" (ngSubmit)="searchReview()"> -->
+    <form [formGroup]="form" appThrottle (action)="searchReview()">
+      <ul>
+        <li>
+          <p>{{ "REVIEW_RECORD.SEARCH.COL-TYPE" | translate }}</p>
+          <select class="type-selector" [formControl]="selectReview">
+            <option *ngFor="let item of reviewOptions" [value]="item.value">
+              {{ item.label }}
+            </option>
+          </select>
+        </li>
+        <li>
+          <p>{{ "REVIEW_RECORD.SEARCH.COL-DATE" | translate }}</p>
+          <div class="date-selector">
+            <input type="date" formControlName="startTime" />
+            <span>~</span>
+            <input type="date" formControlName="endTime" />
+            <!-- <div><i></i></div> -->
+          </div>
+        </li>
+        <li>
+          <app-date-selector (timeEvt)="setTime($event)"></app-date-selector>
+        </li>
+        <li>
+          <button class="btn-confirm orange_btn">
+            {{ "REVIEW_RECORD.SEARCH.CONFIRM" | translate }}
+          </button>
+        </li>
+      </ul>
+    </form>
+  </div>
+  <div class="review-body">
+    <div class="empty-data" *ngIf="pageConfig.totalItems === 0">
+      {{ "NO_DATA" | translate }}
+    </div>
+    <div class="record panel-style" *ngFor="let item of list">
+      <ul>
+        <li class="r-header">
+          <span>{{ typeNameNow }}</span>
+          <span class="time">{{ item.committedAt }}</span>
+        </li>
+        <li class="r-body">
+          <ul class="r-detail">
+            <li>
+              <span>{{
+                "REVIEW_RECORD.DEPOSIT.TABLE.STATUS" | translate
+              }}</span>
+              <span>{{ item.statTxt }} {{ item.transactionStatusTxt }}</span>
+            </li>
+            <ng-container [ngSwitch]="type">
+              <ng-container *ngSwitchCase="reviewType.deposit">
+                <li>
+                  <span>{{ "REVIEW_RECORD.apply_amount" | translate }}</span>
+                  <span>{{ item.apply_amount }}</span>
+                </li>
+                <li>
+                  <span>{{
+                    "REVIEW_RECORD.DEPOSIT.TABLE.AMOUNT" | translate
+                  }}</span>
+                  <span>{{ item.money ? item.money : "-" }}</span>
+                </li>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="reviewType.withdraw">
+                <li>
+                  <span>{{ "REVIEW_RECORD.apply_amount" | translate }}</span>
+                  <span>{{ item.money ? item.money : "-" }}</span>
+                </li>
+                <li *ngIf="item.transactionStatus == 'completed'">
+                  <span>{{ "REVIEW_RECORD.WITHDRAW.AMOUNT" | translate }}</span>
+                  <span>{{
+                    item.transaction_momey ? item.transaction_momey : "-"
+                  }}</span>
+                </li>
+                <li *ngIf="item.transactionStatus ==  'completed'">
+                  <span>{{ "REVIEW_RECORD.WITHDRAW.fee" | translate }}</span>
+                  <span>{{ item.withdraw_fee ? item.withdraw_fee : "-" }}</span>
+                </li>
+              </ng-container>
+
+            </ng-container>
+            <li>
+              <span>{{
+                "REVIEW_RECORD.DEPOSIT.TABLE.CONTENT" | translate
+              }}</span>
+              <span>{{ item.cntTxt }}</span>
+            </li>
+          </ul>
+        </li>
+        <!-- <li class="r-footer">
+            <button class="orange_btn">
+              {{ "REVIEW_RECORD.DEPOSIT.TABLE.BTN-UPDATE" | translate }}
+            </button>
+          </li> -->
+      </ul>
+    </div>
+  </div>
+</div>

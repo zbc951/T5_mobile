@@ -1,0 +1,8 @@
+{
+  "/api/**": {
+    "target": "https://mbnt1-demo.op8899.net",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

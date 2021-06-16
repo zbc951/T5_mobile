@@ -1,0 +1,155 @@
+<div
+  style="
+    background-color: #f8f8f8;
+    padding: 0 0 10px;
+    min-height: calc(100vh - 45px - 47px);
+  "
+>
+  <div class="wallet white-bg">
+    <div class="gradient">
+      <div class="content panel-style">
+        <!-- <ng-container *ngIf="!isActivityWallet; else elsebox"> -->
+        <div class="amount">
+          <div class="helf">
+            <div class="title">
+              {{ "MY-WALLET.TOTAL.CENTER" | translate }}
+            </div>
+            <p>${{ user.money | floatDisplay }}</p>
+          </div>
+          <div class="helf">
+            <p class="tips" [class.active]="nowTip == tips.withdraw">
+              {{ "MY-WALLET.TOTAL.CENTER" | translate }} -
+              {{ "MY-WALLET.ABLE.LOCK" | translate }}
+            </p>
+            <div class="title black">
+              {{ "MY-WALLET.ABLE.TITLE" | translate }}
+              <div class="icon" (click)="showTips(tips.withdraw)"></div>
+            </div>
+            <p>${{ ableMoney }}</p>
+          </div>
+        </div>
+        <div class="limit">
+          <p>{{ "MY-WALLET.ABLE.LOCK" | translate }}</p>
+          <p>${{ user.wallet?.locked_amount | floatDisplay }}</p>
+        </div>
+        <!-- </ng-container> -->
+        <!-- <ng-template #elsebox>
+          <div class="amount">
+            <div class="helf">
+              <p class="tips" [class.active]="nowTip == tips.sum">
+                {{ "MY-WALLET.TOTAL.CENTER" | translate }} +
+                {{ "MY-WALLET.TOTAL.COUPON" | translate }}+
+                {{ "MY-WALLET.PLATFORM-PAGE-TITLE" | translate }}
+              </p>
+              <div class="title">
+                {{ "MY-WALLET.TOTAL.TITLE" | translate }}
+                <div class="icon" (click)="showTips(tips.sum)"></div>
+              </div>
+              <p>${{ total | floatDisplay }}</p>
+            </div>
+            <div class="helf">
+              <p class="tips" [class.active]="nowTip == tips.withdraw">
+                {{ "MY-WALLET.TOTAL.CENTER" | translate }} -
+                {{ "MY-WALLET.ABLE.LOCK" | translate }}
+              </p>
+              <div class="title black">
+                {{ "MY-WALLET.ABLE.TITLE" | translate }}
+                <div class="icon" (click)="showTips(tips.withdraw)"></div>
+              </div>
+              <p>${{ ableMoney | floatDisplay }}</p>
+            </div>
+          </div>
+          <div class="wallets">
+            <div class="item">
+              <p style="color: #ed1c24">
+                {{ "MY-WALLET.TOTAL.CENTER" | translate }}
+              </p>
+              <p>${{ user.money | floatDisplay }}</p>
+            </div>
+            <div class="item">
+              <p>{{ "MY-WALLET.ABLE.LOCK" | translate }}</p>
+              <p>${{ user.wallet?.locked_amount | floatDisplay }}</p>
+            </div>
+          </div>
+          <div class="wallets">
+            <div class="item">
+              <p style="color: #ff8600">
+                {{ "MY-WALLET.TOTAL.COUPON" | translate }}
+              </p>
+              <p>${{ walletSumup | floatDisplay }}</p>
+            </div>
+            <div class="item"></div>
+          </div>
+        </ng-template> -->
+      </div>
+    </div>
+    <ul>
+      <li routerLink="/{{ AppRoutes.DEPOSIT }}">
+        <i></i>
+        <p>{{ "MY-WALLET.deposit" | translate }}</p>
+      </li>
+      <li routerLink="/{{ AppRoutes.TRANSFER }}">
+        <i></i>
+        <p>{{ "MY-WALLET.tranfer" | translate }}</p>
+      </li>
+      <li routerLink="/{{ AppRoutes.WITHDRAWAL }}">
+        <i></i>
+        <p>{{ "MY-WALLET.withdraw" | translate }}</p>
+      </li>
+    </ul>
+  </div>
+  <!-- <div class="btn-group" *ngIf="isActivityWallet">
+    <button
+      (click)="typeChange(WalletType.COUPON)"
+      [ngClass]="{ active: curWalletType === WalletType.COUPON }"
+    >
+      {{ "MY-WALLET.COUPON-PAGE-TITLE" | translate }}
+    </button>
+    <button
+      (click)="typeChange(WalletType.COUPON_HISTORY)"
+      [ngClass]="{ active: curWalletType === WalletType.COUPON_HISTORY }"
+    >
+      {{ "MY-WALLET.COUPON-HISTORY-TITLE" | translate }}
+    </button>
+    <button
+      (click)="typeChange(WalletType.PLATFORM)"
+      [ngClass]="{ active: curWalletType === WalletType.PLATFORM }"
+    >
+      {{ "MY-WALLET.PLATFORM-PAGE-TITLE" | translate }}
+    </button>
+  </div> -->
+  <div class="white-bg">
+    <app-platform-wallet
+      *ngIf="curWalletType === WalletType.PLATFORM"
+    ></app-platform-wallet>
+    <app-coupon-wallet
+      *ngIf="curWalletType === WalletType.COUPON"
+      class="white-bg"
+      [tab]="curWalletType"
+    ></app-coupon-wallet>
+
+    <app-coupon-wallet
+      *ngIf="curWalletType === WalletType.COUPON_HISTORY"
+      class="white-bg"
+      [tab]="curWalletType"
+    ></app-coupon-wallet>
+  </div>
+  <div class="options bet white-bg" routerLink="/{{ AppRoutes.BET_LOG }}">
+    <div style="display: flex; align-items: center">
+      <i class="icon"></i>
+      <p>
+        {{ "MEMBER_NAV.BET_LOG" | translate }}
+      </p>
+    </div>
+    <i class="arrow"></i>
+  </div>
+  <div class="options trans white-bg" routerLink="/{{ AppRoutes.REVIEW_MAIN }}">
+    <div style="display: flex; align-items: center">
+      <i class="icon"></i>
+      <p>
+        {{ "MEMBER_NAV.TRANSFER_LOG" | translate }}
+      </p>
+    </div>
+    <i class="arrow"></i>
+  </div>
+</div>

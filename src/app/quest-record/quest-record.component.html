@@ -1,0 +1,101 @@
+<div class="scroll-wrap">
+  <div class="search-contain">
+    <!-- <form [formGroup]="form" (ngSubmit)="getQuestRecord()"> -->
+    <form [formGroup]="form" appThrottle (action)="getQuestRecord()">
+      <ul>
+        <li>
+          <p>{{ "REVIEW_RECORD.SEARCH.COL-TYPE" | translate }}</p>
+          <select class="type-selector" formControlName="status">
+            <option value="">
+              {{ "REVIEW_STATUS.ALL" | translate }}
+            </option>
+            <option
+              *ngFor="let item of statusTxt | keyvalue"
+              [value]="item.key"
+            >
+              {{ item.value }}
+            </option>
+          </select>
+        </li>
+        <li>
+          <p>{{ "REVIEW_RECORD.SEARCH.COL-DATE" | translate }}</p>
+          <div class="date-selector">
+            <input type="date" formControlName="start_at" />
+            <span>~</span>
+            <input type="date" formControlName="end_at" />
+            <!-- <div><i></i></div> -->
+          </div>
+        </li>
+        <li>
+          <app-date-selector (timeEvt)="setTime($event)"></app-date-selector>
+        </li>
+        <li>
+          <button class="btn-confirm orange_btn">
+            {{ "REVIEW_RECORD.SEARCH.CONFIRM" | translate }}
+          </button>
+        </li>
+      </ul>
+    </form>
+  </div>
+  <div class="review-body">
+    <div class="empty-data" *ngIf="isNoRecord">
+      {{ "NO_DATA" | translate }}
+    </div>
+    <div class="record panel-style" *ngFor="let item of questRecord">
+      <ul>
+        <li class="r-header">
+          <span>{{ item.questName }}</span>
+          <!-- <span class="time" *ngIf="item.startTime || item.endTime"
+            >{{ item.startTime }}~{{ item.endTime }}</span
+          > -->
+          <p>
+            <span class="status_label">{{
+              "MEMBER_QUEST.STATUS" | translate
+            }}</span>
+            <span class="status">
+              {{ item.status }}
+            </span>
+          </p>
+        </li>
+        <li class="r-body">
+          <ul class="r-detail">
+            <li>
+              <span>{{ "MEMBER_QUEST.BETAMOUNT" | translate }}</span>
+              <span class="num">{{ item.betAmount }}</span>
+            </li>
+            <li>
+              <span>{{ "MEMBER_QUEST.NOW_BETAMOUNT" | translate }}</span>
+              <span class="num">{{ item.currentBetAmount }}</span>
+            </li>
+            <li>
+              <span>{{ "MEMBER_QUEST.REWARD" | translate }}</span>
+              <span class="num">{{ item.reward }}</span>
+            </li>
+            <li>
+              <span>{{ "MEMBER_QUEST.PERCENTAGE" | translate }}</span>
+              <span class="num">{{ item.percentage }}</span>
+            </li>
+            <li>
+              <span>{{ "MEMBER_QUEST.REWARD_MAX" | translate }}</span>
+              <span class="num">{{ item.maxReward }}</span>
+            </li>
+            <li>
+              <span>{{ "MEMBER_QUEST.AMOUNT_MIN" | translate }}</span>
+              <span class="num">{{ item.minBetAmount }}</span>
+            </li>
+            <!-- <li>
+              <span>{{ "MEMBER_QUEST.STATUS" | translate }}</span>
+              <span>
+                {{ item.status }}
+              </span>
+            </li> -->
+            <li>
+              <span>{{ "MEMBER_QUEST.REASON" | translate }}</span>
+              <span>{{ item.reason }}</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

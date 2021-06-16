@@ -1,0 +1,69 @@
+.home-center {
+  padding: 0 11px 0;
+}
+
+.games {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2px 0px 30px;
+
+  li {
+    position: relative;
+    width: 33.3%;
+    height: 21vw;
+    margin-bottom: 7vw;
+    // outline: 1px solid pink;
+
+    div {
+      width: 100%;
+      height: 100%;
+      // background: url("../../assets/img/new/mainIC.png") no-repeat;
+      background: no-repeat center;
+      background-size: cover;
+    }
+
+    p {
+      width: 81%;
+      height: 4vw;
+      margin: 1vw auto 0px;
+      border-radius: 5px;
+      position: relative;
+      text-align: center;
+      color: #996c33;
+      font-size: 3.3vw;
+
+      span {
+        color: #d4a15f;
+        padding-right: 3px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  /* For mobile phones: */
+
+  .type {
+    li {
+      div {
+        i {
+          outline: 1px solid pink;
+          display: none;
+        }
+
+        p {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (height: 812px) {
+  /* For mobile phones: */
+
+  .games {
+    height: 97.7vw;
+  }
+}

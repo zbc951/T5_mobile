@@ -1,0 +1,155 @@
+.wallet {
+  width: 92vw;
+  // height: 22.67vw;
+  padding: 11px 11px 10px 15px;
+  margin: 0 auto 8px;
+
+  & > div {
+    width: 55%;
+  }
+
+  .title {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #3d4cce;
+
+    i {
+      width: 4.27vw;
+      height: 4.27vw;
+      margin: 0 0 0 6px;
+      background: url("~src/assets/img/refresh.svg") no-repeat center center;
+    }
+
+    p {
+      color: #c0933e;
+    }
+
+    button {
+      width: 18.93vw;
+      height: 6.13vw;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+  }
+
+  .amount {
+    font-size: 29px;
+    letter-spacing: 0px;
+    color: #272727;
+  }
+}
+
+.white-bg {
+  background: #fff;
+  margin: 0 0 10px;
+  font-weight: bold;
+
+  &:last-child {
+    margin: 0;
+  }
+}
+
+.auto {
+  display: flex;
+  align-items: center;
+  height: 13.6vw;
+  padding: 0 0 0 18px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #4d4d4d;
+
+  label {
+    display: flex;
+    align-items: center;
+  }
+
+  input {
+    width: 4.8vw;
+    height: 4.8vw;
+    margin: 0 4.8vw 0 0;
+    appearance: auto;
+  }
+}
+
+.operate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 13px 0 16px;
+
+  input,
+  select {
+    width: 92.53vw;
+    height: 11.2vw;
+    margin: 0 auto 13px;
+  }
+
+  select {
+    padding: 0 0 0 52px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #4d4d4d;
+  }
+
+  i {
+    display: block;
+    position: absolute;
+    top: calc((11.2vw - 19px) / 2);
+    left: 18px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #cfa678;
+  }
+
+  .orange_btn {
+    width: 92.53vw;
+    height: 42px;
+    line-height: 42px;
+    font-size: 14px;
+  }
+
+  .confirm {
+    & + .err {
+      font-size: 14px;
+      padding: 10px;
+      text-align: center;
+    }
+  }
+
+  .btns-wrap {
+    justify-content: space-around;
+    & > * {
+      width: 45%;
+    }
+  }
+}
+
+.btn-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 10px;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46.4vw;
+    height: 10.67vw;
+    background: #ccc;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px 0 0 5px;
+    color: #fff;
+
+    &:nth-child(2) {
+      border-radius: 0 5px 5px 0;
+    }
+
+    &.active {
+      background: linear-gradient(#3178ff, #784dff);
+    }
+  }
+}

@@ -1,0 +1,27 @@
+<div class="page-header">
+  <ul>
+    <li [class.active]="tab === tabs.apply" (click)="selectType(tabs.apply)">
+      {{ "MEMBER_QUEST.APPLY_TAB" | translate }}
+    </li>
+    <li [class.active]="tab == tabs.applied" (click)="selectType(tabs.applied)">
+      {{ "MEMBER_QUEST.APPLIED_TAB" | translate }}
+    </li>
+    <li
+      [class.active]="tab === tabs.recored"
+      (click)="selectType(tabs.recored)"
+    >
+      {{ "MEMBER_QUEST.RECORD_TAB" | translate }}
+    </li>
+  </ul>
+</div>
+<div class="page-body" [ngSwitch]="tab">
+  <app-combine-quest-apply
+    *ngSwitchCase="tabs.apply"
+    [tab]="tab"
+  ></app-combine-quest-apply>
+  <app-quest-record *ngSwitchCase="tabs.recored"></app-quest-record>
+  <app-combine-quest-apply
+    *ngSwitchCase="tabs.applied"
+    [tab]="tab"
+  ></app-combine-quest-apply>
+</div>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>au8_mobile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <script>
+    // 本地開發時必須自行更換
+    //window.SocketServer = { host: "http://3.113.179.224", port: "8102" };
+    window.ApiServer = { host: "", port: "" };
+    window.loopConfig = { isLoop: true, loopMs: 3000 };
+    window.noLogo = { noLogo: false };
+    window.mdReplaces = {
+      "{SITE_NAME}": "AU8",
+      "{LIVE_CHAT}": "https://ssvip01.comm800.com/standalone.html?appId=328443",
+      "{LINE_ID}": "%LINE_ID%",
+      "{LINE_ID_URL}": "%LINE_ID_URL%",
+      "{SITE_HOST}": "%SITE_HOST%",
+    };
+    window.csServices = {
+      "live_chat": "https://ssvip01.comm800.com/standalone.html?appId=328443&lang=zhTW",
+      "line": { "id": "@259onklj", "url": "https://lin.ee/TQDE5a4" },
+      // "zalo": { "id": "@zalo", "url":"https://google.com" },
+      // "wechat": { "id": "@wechat", "url": "https://google.com" },
+    };
+  </script>
+</head>
+
+<body>
+  <app-root></app-root>
+</body>
+
+</html>

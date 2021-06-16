@@ -1,0 +1,11 @@
+<div class="btn-group">
+  <button
+    type="button"
+    class="gray_btn"
+    *ngFor="let item of options; let i = index"
+    [class.active]="i == selected"
+    (click)="select(i)"
+  >
+    {{ item.label }}
+  </button>
+</div>

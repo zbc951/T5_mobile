@@ -1,0 +1,5 @@
+<div class="pagination-out">
+  <ul class="pagination">
+    <li *ngFor="let item of showItems;let i = index" [ngClass]="{'cur': curPage === i}"></li>
+  </ul>
+</div>

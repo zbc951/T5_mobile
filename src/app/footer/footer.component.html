@@ -1,0 +1,74 @@
+<ul class="footer g-12">
+  <li routerLink="/{{ AppRoutes.HOME }}">
+    <i [ngClass]="{ active: curRoute === AppRoutes.HOME }"></i>
+    <p [ngClass]="{ active: curRoute === AppRoutes.HOME }">
+      {{ "HOME" | translate }}
+    </p>
+  </li>
+  <li routerLink="/{{ AppRoutes.QUEST }}">
+    <i [ngClass]="{ active: curRoute === AppRoutes.QUEST }"></i>
+    <p [ngClass]="{ active: curRoute === AppRoutes.QUEST }">
+      {{ "COUPON" | translate }}
+    </p>
+  </li>
+  <li routerLink="/{{ AppRoutes.MY_WALLET }}">
+    <i [ngClass]="{ active: curRoute === AppRoutes.MY_WALLET }"></i>
+    <p [ngClass]="{ active: curRoute === AppRoutes.MY_WALLET }">
+      {{ "WALLET" | translate }}
+    </p>
+  </li>
+  <!-- <li (click)="HeaderService.goComm()">
+    <i [class.active]="isContactPage"></i>
+    <p [class.active]="isContactPage">
+      {{ "SERVICE" | translate }}
+    </p>
+  </li> -->
+  <li routerLink="/{{ AppRoutes.CUSTOMER }}">
+    <i [ngClass]="{ active: curRoute === AppRoutes.CUSTOMER }"></i>
+    <p [ngClass]="{ active: curRoute === AppRoutes.CUSTOMER }">
+      {{ "SERVICE" | translate }}
+    </p>
+  </li>
+  <li routerLink="/{{ AppRoutes.MEMBER_CENTER }}">
+    <i
+      [ngClass]="{
+        active:
+          curRoute === AppRoutes.MEMBER_CENTER ||
+          curRoute === AppRoutes.USER_INFO ||
+          curRoute === AppRoutes.USER_INFO_PLATFORM ||
+          (curRoute === AppRoutes.HELP_CENTER && isContactPage == false) ||
+          curRoute === AppRoutes.HELP ||
+          curRoute === AppRoutes.HELP_ABOUT ||
+          curRoute === AppRoutes.JOIN_US ||
+          curRoute === AppRoutes.DOWNLOAD_APP ||
+          curRoute === AppRoutes.BANK_CARD ||
+          curRoute === AppRoutes.LETTER ||
+          curRoute === AppRoutes.REVIEW_MAIN ||
+          curRoute === AppRoutes.BET_LOG ||
+          curRoute === AppRoutes.VIP ||
+          curRoute === AppRoutes.VIP_DETAIL
+      }"
+    ></i>
+    <p
+      [ngClass]="{
+        active:
+          curRoute === AppRoutes.MEMBER_CENTER ||
+          curRoute === AppRoutes.USER_INFO ||
+          curRoute === AppRoutes.USER_INFO_PLATFORM ||
+          (curRoute === AppRoutes.HELP_CENTER && isContactPage == false) ||
+          curRoute === AppRoutes.HELP ||
+          curRoute === AppRoutes.HELP_ABOUT ||
+          curRoute === AppRoutes.JOIN_US ||
+          curRoute === AppRoutes.DOWNLOAD_APP ||
+          curRoute === AppRoutes.BANK_CARD ||
+          curRoute === AppRoutes.LETTER ||
+          curRoute === AppRoutes.REVIEW_MAIN ||
+          curRoute === AppRoutes.BET_LOG ||
+          curRoute === AppRoutes.VIP ||
+          curRoute === AppRoutes.VIP_DETAIL
+      }"
+    >
+      {{ "MEMBER_NAV.TITLE" | translate }}
+    </p>
+  </li>
+</ul>

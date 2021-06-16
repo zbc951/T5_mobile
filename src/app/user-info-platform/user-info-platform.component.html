@@ -1,0 +1,48 @@
+<div class="menu">
+  <span routerLink="/{{ AppRoutes.USER_INFO }}">{{
+    "MEMBER_INFO.basic" | translate
+  }}</span>
+  <span routerLink="/{{ AppRoutes.USER_INFO_PLATFORM }}" class="active">{{
+    "MEMBER_INFO.platform" | translate
+  }}</span>
+</div>
+<div class="main">
+  <p *ngIf="pdata.length === 0" class="no-data">
+    {{ "NO_DATA" | translate }}
+  </p>
+  <ul>
+    <li *ngFor="let item of pdata">
+      <p>{{ item.name }}</p>
+      <p>
+        <span>{{ "MEMBER_INFO.code" | translate }}</span
+        ><span> {{ item.key }}</span>
+        <span></span>
+      </p>
+      <p>
+        <span>{{ "MEMBER_INFO.uid" | translate }}</span
+        ><span>{{ item.uid }}</span>
+        <button [cdkCopyToClipboard]="item.uid">
+          {{ "MEMBER_INFO.copy_btn" | translate }}
+        </button>
+      </p>
+      <p>
+        <span>{{ "MEMBER_INFO.pwd" | translate }}</span
+        ><span>{{ item.pwd }}</span>
+        <button [cdkCopyToClipboard]="item.pwd">
+          {{ "MEMBER_INFO.copy_btn" | translate }}
+        </button>
+      </p>
+      <p>
+        <span>{{ "MEMBER_INFO.status" | translate }}</span
+        ><span>
+          {{ "MEMBER_INFO_PLATFORM.status." + item.status | translate }}</span
+        ><span></span>
+      </p>
+      <p>
+        <span>{{ "MEMBER_INFO.llt" | translate }}</span
+        ><span>{{ item.lls }}</span
+        ><span></span>
+      </p>
+    </li>
+  </ul>
+</div>

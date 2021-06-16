@@ -1,0 +1,125 @@
+<div class="common-alert" *ngFor="let item of alertMessages" [class.quest]="item.type == ToastType.QuestDetail">
+  <div
+    class="panel"
+    [class.policy]="
+      item.type == ToastType.Policy || item.type == ToastType.QuestDetail
+    "
+  >
+    <div class="header">
+      {{
+        item.type == ToastType.QuestDetail
+          ? ("MEMBER_QUEST.detailTitle" | translate)
+          : ("TIPS" | translate)
+      }}
+    </div>
+
+    <ng-container [ngSwitch]="item.type">
+      <ng-container *ngSwitchCase="ToastType.Policy">
+        <div class="cnt">
+          <div class="policy-block" [innerHTML]="item.message"></div>
+        </div>
+        <div class="btm">
+          <button (click)="removeAlert(item)">
+            {{ "RULE.agree" | translate }}
+          </button>
+        </div>
+      </ng-container>
+      <ng-container *ngSwitchCase="ToastType.ForceAlert">
+        <div class="cnt">
+          <div class="policy-block" [innerHTML]="item.message"></div>
+        </div>
+        <div class="btm">
+          <button (click)="removeAlert(item)">
+            {{ "RULE.agree" | translate }}
+          </button>
+        </div>
+      </ng-container>
+      <ng-container *ngSwitchCase="ToastType.Confirm">
+        <div class="cnt">
+          <div class="policy-block" [innerHTML]="item.message"></div>
+        </div>
+        <div class="btm with-cancel">
+          <button (click)="removeAlert(item)">
+            {{ "RULE.agree" | translate }}
+          </button>
+          <button class="cancel" (click)="cancel(item)">
+            {{ "REVIEW_STATUS.CANCEL" | translate }}
+          </button>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="ToastType.Activity_buy">
+        <div class="cnt act-cnt">
+          <p>{{ item.message }}</p>
+          <input
+            type="number"
+            #input
+            [min]="percentMinPrice"
+            [(ngModel)]="actPrice"
+          />
+        </div>
+        <div class="btm with-cancel">
+          <button
+            (click)="removeAlert(item)"
+            [disabled]="input.value < percentMinPrice"
+          >
+            {{ "QUEST_CENTER.BTN-BUY" | translate }}
+          </button>
+          <button class="cancel" (click)="cancel(item)">
+            {{ "REVIEW_STATUS.CANCEL" | translate }}
+          </button>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="ToastType.QuestDetail">
+        <div class="cnt">
+          <div class="quest-detail-cnt" [innerHTML]="item.message"></div>
+        </div>
+        <div class="btm">
+          <button (click)="removeAlert(item)">
+            {{ "MEMBER_INFO.CONFIRM" | translate }}
+          </button>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="ToastType.QuestCondition">
+        <div class="quest-condition-cnt">
+          <ul class="info">
+            <li>
+              <p>{{ "MEMBER_QUEST.STAGETABLE.REACH" | translate }}</p>
+              <p class="target">{{ stage.amount }}</p>
+            </li>
+            <li>
+              <p>{{ "MEMBER_QUEST.STAGETABLE.GAIN" | translate }}</p>
+              <p class="gain" *ngIf="stage?.reward">{{ stage.reward }}</p>
+              <p class="gain" *ngIf="stage?.percent">
+                {{ "MEMBER_QUEST.AMOUNT" | translate }}{{ stage.percent }}%
+              </p>
+            </li>
+          </ul>
+          <ul class="conditions">
+            <li *ngFor="let conditions of stage?.condition">
+              <ng-container *ngIf="conditions.value">
+                {{ "quest_conditions." + conditions.code | translate }}: {{ conditions.value }}
+              </ng-container>
+            </li>
+          </ul>
+        </div>
+        <div class="btm">
+          <button (click)="removeAlert(item)">
+            {{ "MEMBER_INFO.CONFIRM" | translate }}
+          </button>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchDefault>
+        <div class="cnt">{{ item.message }}</div>
+        <div class="btm">
+          <button (click)="removeAlert(item)">
+            {{ "MEMBER_INFO.CONFIRM" | translate }}
+          </button>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.flex {
+  display: flex;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
+// .content-warp {
+//   width: 1000px;
+//   margin: 0 auto;
+// }
+
+.popup {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, .4);
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.scroll-bar {
+  &::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+    border-radius: 2.5px;
+  }
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: #F5F5F5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2.5px;
+    background-color: rgba(77, 77, 77, 0.4);
+  }
+
+}

@@ -1,0 +1,268 @@
+<div
+  style="
+    background-color: #f8f8f8;
+    padding: 10px 0 10px;
+    min-height: calc(100vh - 45px - 47px);
+  "
+>
+  <app-announcement></app-announcement>
+  <div class="method white-bg" *ngIf="status === bankpage.form">
+    <div class="title">
+      {{ "MEMBER_DEPOSIT.method" | translate }}
+    </div>
+    <div class="method-wrap">
+      <ul>
+        <li
+          class="gray-btn-frame"
+          (click)="typeChange(type.BANK)"
+          *ngIf="isHaveBank"
+        >
+          <div class="frame" [ngClass]="{ active: curType === type.BANK }">
+            <div class="frame-content">
+              <i></i>
+            </div>
+          </div>
+          <i></i>
+          <p>
+            {{ "DEPOSIT.TOP.BANK" | translate }}
+          </p>
+        </li>
+        <!-- <li class="gray-btn-frame" (click)="typeChange(type.MARKET)">
+          <div class="frame" [ngClass]="{ active: curType === type.MARKET }">
+            <div class="frame-content">
+              <i></i>
+            </div>
+          </div>
+          <i></i>
+          <p>
+            {{ "DEPOSIT.TOP.MARKET" | translate }}
+          </p>
+        </li>
+        <li class="gray-btn-frame" (click)="typeChange(type.ATM)">
+          <div class="frame" [ngClass]="{ active: curType === type.ATM }">
+            <div class="frame-content">
+              <i></i>
+            </div>
+          </div>
+          <i></i>
+          <p>
+            {{ "DEPOSIT.TOP.NETATM" | translate }}
+          </p>
+        </li> -->
+
+        <li
+          class="gray-btn-frame"
+          [class]="item.class"
+          *ngFor="let item of thirdPaymentsMenu; let i = index"
+          (click)="typeChange(item.type)"
+        >
+          <div class="frame" [ngClass]="{ active: curType === item.type }">
+            <div class="frame-content">
+              <i></i>
+            </div>
+          </div>
+          <i></i>
+          <p>
+            {{ item.typename }}
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div
+    class="content white-bg"
+    *ngIf="status === bankpage.form && curType === type.BANK && isHaveBank"
+  >
+    <ul *ngIf="curType === type.MARKET">
+      <li class="gray-btn-frame">
+        <i></i>
+        <p>{{ "DEPOSIT.7-11" | translate }}</p>
+      </li>
+      <li class="gray-btn-frame">
+        <i></i>
+        <p>{{ "DEPOSIT.family" | translate }}</p>
+      </li>
+      <li class="gray-btn-frame">
+        <i></i>
+        <p>{{ "DEPOSIT.hilife" | translate }}</p>
+      </li>
+      <li class="gray-btn-frame">
+        <i></i>
+        <p>{{ "DEPOSIT.ok" | translate }}</p>
+      </li>
+    </ul>
+    <form [formGroup]="form">
+      <div class="bank" *ngIf="curType === type.BANK">
+        <div class="bank-title">
+          {{ "DEPOSIT.BOTTOM.BANK" | translate }}
+          <p>
+            {{ "DEPOSIT.BOTTOM.bank-notice" | translate }}
+          </p>
+        </div>
+        <select name="" id="" formControlName="transactionId">
+          <option value="0" disabled selected>
+            {{ "PLEASE-CHOSE" | translate }}
+          </option>
+          <option value="{{ item.account }}" *ngFor="let item of banks">
+            {{ item.bankName }}
+            <span *ngIf="item.branchName"> - {{ item.branchName }}</span>
+          </option>
+        </select>
+        <div class="tail">
+          {{ "DEPOSIT.BOTTOM.TAIL" | translate }}:
+          <p>{{ tail_code }}</p>
+        </div>
+      </div>
+      <div class="amount">
+        <div class="amount-title">
+          {{ "DEPOSIT.BOTTOM.AMOUNT" | translate }}
+        </div>
+        <input
+          type="number"
+          placeholder="{{ 'TRANSFER.placeholder' | translate }}"
+          formControlName="money"
+          appNumberOnly
+          [min]="limit.depositMinPer"
+          [max]="limit.depositMaxPer"
+        />
+        <p>
+          {{ "MEMBER_DEPOSIT.MONEY_PS1" | translate }}
+          {{ limit.depositMinPer | number: "1.0-2" }} -
+          {{ limit.depositMaxPer | number: "1.0-2" }}
+        </p>
+        <!-- <button class="orange_btn"  *ngIf="curType === type.MARKET">{{ "DEPOSIT.BOTTOM.ATM-TRANS.SUBMIT" | translate }}</button>
+      <button class="orange_btn"  *ngIf="curType === type.BANK" (click)="deposit()">{{ "DEPOSIT.BOTTOM.SUBMIT" | translate }}</button> -->
+      </div>
+    </form>
+    <button class="orange_btn" *ngIf="curType === type.MARKET">
+      {{ "DEPOSIT.BOTTOM.ATM-TRANS.SUBMIT" | translate }}
+    </button>
+    <!-- (click)="commitDeposit(form)" -->
+    <button
+      *ngIf="curType === type.BANK"
+      class="orange_btn"
+      appThrottle
+      (action)="doComit(form)"
+      [disabled]="locked"
+    >
+      {{ "DEPOSIT.BOTTOM.SUBMIT" | translate }}
+    </button>
+  </div>
+
+  <div class="confirm white-bg" *ngIf="status === bankpage.review">
+    <div class="confirm-title">
+      {{ "DEPOSIT.BOTTOM.BANK-TRANS.TITLE2" | translate }}
+    </div>
+    <div class="row">
+      {{ "DEPOSIT.BOTTOM.BANK-TRANS.BANK" | translate }}
+      <p>{{ bankinfo.payeeBankName }}-{{ bankinfo.payeeBranchName }}</p>
+    </div>
+    <div class="row">
+      {{ "DEPOSIT.BOTTOM.BANK-TRANS.ACCOUNT" | translate }}
+      <p>{{ bankinfo.payeeAccount }}</p>
+      <button
+        type="button"
+        class="white_orange_btn"
+        [cdkCopyToClipboard]="bankinfo.payeeAccount"
+      >
+        {{ "DEPOSIT.BOTTOM.BANK-TRANS.COPY2" | translate }}
+      </button>
+    </div>
+    <div class="amount">
+      <div class="number">
+        ${{ bankinfo.applyAmount | number: "1.0-2" }}
+        <button
+          type="button"
+          class="white_orange_btn"
+          [cdkCopyToClipboard]="bankinfo.applyAmount"
+          [disabled]="locked"
+        >
+          {{ "DEPOSIT.BOTTOM.BANK-TRANS.COPY2" | translate }}
+        </button>
+      </div>
+      <p>{{ "DEPOSIT.BOTTOM.BANK-TRANS.NOTICE" | translate }}</p>
+    </div>
+    <!-- <button class="orange_btn" (click)="confirm()">
+      {{ "DEPOSIT.BOTTOM.BANK-TRANS.SUBMIT" | translate }}
+    </button> -->
+    <button
+      class="orange_btn"
+      [disabled]="bankinfo.status == reviewStatus.Review"
+      appThrottle
+      (action)="commitDeposit(tmpForm)"
+    >
+      {{
+        bankinfo.status == reviewStatus.Review
+          ? ("REVIEW_STATUS.REVIEW" | translate)
+          : ("DEPOSIT.BOTTOM.BANK-TRANS.SUBMIT" | translate)
+      }}
+    </button>
+  </div>
+
+  <div class="third white-bg" *ngIf="isThirdPay || !isHaveBank">
+    <!-- <form [formGroup]="thirdForm" (ngSubmit)="thirdDeposit()"> -->
+    <form [formGroup]="thirdForm" appThrottle (action)="thirdDeposit()">
+      <div class="row">
+        <p>
+          <i>※</i>
+          {{ "DEPOSIT.BOTTOM.SELECT-CHANNEL" | translate }}
+        </p>
+
+        <select formControlName="selectIdx">
+          <option
+            *ngFor="let item of payments; let idx = index"
+            value="{{ idx }}"
+          >
+            {{ item.name }}
+          </option>
+        </select>
+      </div>
+      <div class="row">
+        <p>
+          <i>※</i>
+          {{ "DEPOSIT.BOTTOM.AMOUNT" | translate }}
+        </p>
+        <select
+          class="pay_type"
+          name="amounts"
+          *ngIf="
+            paymentsAmounts && paymentsAmounts.length > 0;
+            else simpleinput
+          "
+          formControlName="amount"
+        >
+          <option *ngFor="let item of paymentsAmounts" value="{{ item }}">
+            {{ item }}
+          </option>
+        </select>
+        <ng-template #simpleinput>
+          <input
+            type="text"
+            name="simpleinput"
+            placeholder="{{ 'MEMBER_DEPOSIT.AMOUNT_HOLDER' | translate }}"
+            formControlName="amount"
+          />
+          <p class="tips">
+            {{ "MEMBER_DEPOSIT.MONEY_PS1" | translate }} ${{
+              thirdMin | number: "1.0-2"
+            }}
+            - ${{ thirdMax | number: "1.0-2" }}
+          </p>
+        </ng-template>
+      </div>
+      <button class="orange_btn" [disabled]="locked">
+        {{ "DEPOSIT.BOTTOM.SUBMIT" | translate }}
+      </button>
+    </form>
+  </div>
+
+  <div class="notice">
+    <div class="notice-title">
+      {{ "DEPOSIT.BOTTOM.ATM-TRANS.DISCRIPTION.TITLE" | translate }}
+    </div>
+    <p>{{ "DEPOSIT.BOTTOM.BANK-TRANS.DISCRIPTION.1" | translate }}</p>
+    <p>
+      {{ "DEPOSIT.BOTTOM.BANK-TRANS.DISCRIPTION.2" | translate }}
+    </p>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<!-- <div class="ad">
+  <div class="content" (touchstart)="touchS($event)" (touchend)="touchE($event)">
+    <ul class="photo" #ad>
+      <li #list *ngFor="let item of carousels" [style.background-image]="'url(' + item.imageUrl + ')'" (click)="clickCarousel(item)"></li>
+    </ul>
+    <div class="glow" [class.active]="isGlow"></div>
+  </div>
+  <app-pagination-box [showItems]="carousels" [curPage]="curPage" class="page-box"></app-pagination-box>
+</div> -->
+<ngb-carousel *ngIf="carousels">
+  <ng-template ngbSlide *ngFor="let item of carousels">
+    <div class="wrapper" (click)="clickCarousel(item)">
+      <div class="c-container" [style.backgroundImage]="'url(' + item.imageUrl + ')'"></div>
+    </div>
+  </ng-template>
+</ngb-carousel>

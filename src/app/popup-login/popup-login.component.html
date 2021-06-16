@@ -1,0 +1,57 @@
+<div class="mask">
+  <div class="dialog">
+    <div class="title">
+      <div class="icon"></div>
+      <p>{{ "LOGIN.popup-title" | translate }}</p>
+      <i (click)="close()"></i>
+    </div>
+
+    <!-- <form [formGroup]="form" (ngSubmit)="login()"> -->
+    <form [formGroup]="form" appThrottle (action)="login()">
+      <label for="">
+        <input
+          type="text"
+          placeholder="{{ placeholder.account }}"
+          formControlName="account"
+          required
+        />
+        <!-- <p class="err">{{ "LOGIN.err.account" | translate }}</p> -->
+      </label>
+      <label class="pwd">
+        <input
+          [type]="inputType"
+          type="text"
+          placeholder="{{ placeholder.password }}"
+          formControlName="password"
+          required
+        />
+        <img
+          src="assets/img/eye.svg"
+          alt=""
+          *ngIf="isPassword"
+          (click)="passwordChange(false)"
+        />
+        <img
+          src="assets/img/eye2.svg"
+          alt=""
+          *ngIf="!isPassword"
+          (click)="passwordChange(true)"
+        />
+        <!-- <p class="err">{{ "LOGIN.err.pwd" | translate }}</p> -->
+      </label>
+      <div class="forget">
+        <p (click)="openforget()" [innerHTML]="'LOGIN.forget' | translate"></p>
+      </div>
+      <button class="orange_btn" [disabled]="form.invalid">
+        {{ "LOGIN.TITLE" | translate }}
+      </button>
+    </form>
+
+    <div class="register">
+      {{ "LOGIN.not-yet" | translate }}
+      <p (click)="register()">
+        {{ "LOGIN.register" | translate }}
+      </p>
+    </div>
+  </div>
+</div>

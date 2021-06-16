@@ -1,0 +1,40 @@
+<div class="page-header">
+  <ul>
+    <!-- <li
+      [class.active]="selected === tabs.DEPOSIT"
+      (click)="selectType(tabs.DEPOSIT)"
+    >
+      {{ "REVIEW_RECORD.DEPOSIT.TAB" | translate }}
+    </li> -->
+    <!-- <li
+            [class.active]="selected === tabs.BONUS"
+            (click)="selectType(tabs.BONUS)"
+        >{{ "REVIEW_RECORD.BONUS.TAB" | translate }}</li> -->
+    <!-- <li
+    [class.active]="selected === tabs.WALLET"
+    (click)="selectType(tabs.WALLET)"
+  >
+    {{ "REVIEW_RECORD.WALLET.TAB" | translate }}
+  </li>-->
+    <li
+      [class.active]="selected === tabs.TRANSFER"
+      (click)="selectType(tabs.TRANSFER)"
+    >
+      {{ "REVIEW_RECORD.TRANSFER.TAB" | translate }}
+    </li>
+
+    <li
+      [class.active]="selected === tabs.AmountRecord"
+      (click)="selectType(tabs.AmountRecord)"
+    >
+      {{ "MEMBER_WITHDRAW.record" | translate }}
+    </li>
+  </ul>
+</div>
+<div class="page-body" [ngSwitch]="selected">
+  <!-- <app-review *ngSwitchCase="tabs.DEPOSIT"></app-review> -->
+  <!-- <app-review-bonus *ngSwitchCase="tabs.BONUS"></app-review-bonus> -->
+  <!-- <app-review-wallet *ngSwitchCase="tabs.WALLET"></app-review-wallet> -->
+  <app-review-transfer *ngSwitchCase="tabs.TRANSFER"></app-review-transfer>
+  <app-amount-record *ngSwitchCase="tabs.AmountRecord"></app-amount-record>
+</div>

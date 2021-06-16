@@ -1,0 +1,207 @@
+<ul class="list" appList (gotBottom)="onBtm($event)">
+  <li *ngFor="let item of questList">
+    <div class="header">
+      <h3>
+        <!-- {{ item.quest_type_name }} -->
+        {{ item.quest_name }}
+        <span *ngIf="item.locked">{{ "MEMBER_QUEST.LOCKED" | translate }}</span>
+        <span *ngIf="item.locked == false && num(item.valid_amount)">{{
+          "MEMBER_QUEST.UNLOCKED" | translate
+        }}</span>
+      </h3>
+    </div>
+    <div class="day-tips-wrap" *ngIf="item.period.end">
+      <div
+        class="day-tips"
+        [innerHTML]="
+          'MEMBER_QUEST.day-tips' | translate: { value: item.period.end }
+        "
+      ></div>
+    </div>
+    <ul class="items">
+      <li>
+        <label>{{ "MEMBER_QUEST.PERIOD" | translate }}</label>
+        <p>
+          <ng-container *ngIf="item.start_at || item.end_at; else nolimit">
+            <em>{{ item.start_at }} ~ {{ item.end_at }}</em>
+          </ng-container>
+          <ng-template #nolimit>
+            <em>{{ "MEMBER_QUEST.NO_LIMIT" | translate }}</em>
+          </ng-template>
+        </p>
+      </li>
+      <li *ngIf="item.period">
+        <label>{{ "MEMBER_QUEST.period" | translate }}</label>
+        <p>
+          <em>{{ item.period.name }}</em>
+        </p>
+      </li>
+
+      <li>
+        <label class="limit">{{ "MEMBER_QUEST.LIMIT" | translate }}</label>
+        <p>
+          <span
+            ><em class="green">{{ item.now_times }}</em></span
+          ><span class="slash"> / </span>{{ item.limit_times }}
+        </p>
+      </li>
+
+      <li *ngIf="item.percent">
+        <label>
+          {{
+            item.method == "before"
+              ? ("MEMBER_QUEST.PERCENT_BEFORE" | translate)
+              : ("MEMBER_QUEST.PERCENT_AFTER" | translate)
+          }}</label
+        >
+        <p>{{ item.percent | percent: "0.0-2" }}</p>
+      </li>
+
+      <li *ngIf="item.reward">
+        <label>{{ "MEMBER_QUEST.REWARD" | translate }}</label>
+        <p>{{ item.reward | floatDisplay }}</p>
+      </li>
+      <li
+        *ngIf="
+          item['report-total'] &&
+          (item['profit-report-total'] || item['loss-report-total'])
+        "
+      >
+        <label>{{
+          item["profit-report-total"]
+            ? "MEMBER_QUEST.quest_conditions.profit-report-total"
+            : ("MEMBER_QUEST.quest_conditions.loss-report-total" | translate)
+        }}</label>
+        <p>{{ item["report-total"] | floatDisplay }}</p>
+      </li>
+      <li *ngIf="item.bet_amount">
+        <label>{{ "MEMBER_QUEST.bet_amount" | translate }}</label>
+        <p>{{ item.bet_amount | floatDisplay }}</p>
+      </li>
+      <!-- --- -->
+      <li *ngFor="let condition of item.conditions">
+        <ng-container [ngSwitch]="condition.code">
+          <ng-container *ngSwitchCase="'birthday'">
+            <p class="txt" *ngIf="item.method == 'before'">
+              {{ "MEMBER_QUEST.birth_before" | translate }}
+            </p>
+            <p class="txt" *ngIf="item.method == 'after'">
+              {{ "MEMBER_QUEST.birth_after" | translate }}
+            </p>
+          </ng-container>
+          <ng-container *ngSwitchCase="'amount_scale'">
+            <ng-container *ngIf="!item.claimed_at">
+              <label>
+                {{ "quest_conditions." + condition.code | translate }}
+              </label>
+              <p>
+                {{ condition.value }}
+              </p>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngSwitchCase="'valid_amount'">
+            <ng-container *ngIf="condition.value != item.bet_amount">
+              <label>
+                {{ "quest_conditions." + condition.code | translate }}
+              </label>
+              <p>
+                {{ condition.value }}
+              </p>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            <label>
+              {{ "quest_conditions." + condition.code | translate }}
+            </label>
+            <p>
+              {{ condition.value }}
+            </p>
+          </ng-container>
+        </ng-container>
+      </li>
+      <li *ngIf="item.review_deposit">
+        <label>{{ "MEMBER_QUEST.review_deposit" | translate }}</label>
+        <p>{{ item.review_deposit }}</p>
+      </li>
+      <li class="current">
+        <label>{{ "MEMBER_QUEST.NOW_BETAMOUNT" | translate }}</label>
+        <p>
+          <span
+            ><em>{{ item.valid_amount }}</em></span
+          >
+        </p>
+        <div
+          class="cheerup"
+          *ngIf="item.shift"
+          [innerHTML]="
+            'MEMBER_QUEST.STAGETABLE.CHEERUP' | translate: { value: item.shift }
+          "
+        ></div>
+      </li>
+
+      <li *ngIf="item.allowedReward">
+        <label>{{ "MEMBER_QUEST.allowedReward" | translate }}</label>
+        <p>{{ item.allowedReward | floatDisplay }}</p>
+      </li>
+    </ul>
+
+    <div class="btn-group flex">
+      <!-- (click)="applyQuest(item)" -->
+      <button
+        class="apply_btn orange_btn"
+        *ngIf="tab != questTabs.applied"
+        [disabled]="!item.can_reward"
+        appThrottle
+        (action)="applyQuest(item)"
+      >
+        {{ "MEMBER_QUEST.APPLY" | translate }}
+      </button>
+      <button
+        (click)="openDetail(item)"
+        class="activity_btn"
+        [disabled]="item.info_display == 0"
+      >
+        {{ "MEMBER_QUEST.DETAIL" | translate }}
+      </button>
+    </div>
+    <div *ngIf="item.stages" class="stages-table">
+      <ul class="stage-header">
+        <li>
+          <p>
+            {{
+              item.method == "after"
+                ? ("MEMBER_QUEST.STAGETABLE.REACH" | translate)
+                : ("MEMBER_QUEST.STAGETABLE.stage_REACH_before" | translate)
+            }}
+          </p>
+          <p>{{ "MEMBER_QUEST.STAGETABLE.GAIN" | translate }}</p>
+          <p>{{ "MEMBER_QUEST.conditions" | translate }}</p>
+        </li>
+      </ul>
+      <ul class="stage-cnt">
+        <li
+          *ngFor="let stage of item.stagesData"
+          [class.reach]="stage.idx == item.reach"
+        >
+          <p class="target">{{ stage.amount }}</p>
+          <p class="gain" *ngIf="stage.reward">{{ stage.reward }}</p>
+          <p class="gain" *ngIf="stage.percent">
+            {{
+              stage.type == "before"
+                ? ("MEMBER_QUEST.extra9_s" | translate)
+                : ("MEMBER_QUEST.AMOUNT" | translate)
+            }}{{ stage.percent }}%
+          </p>
+          <p>
+            <button class="check-btn" (click)="check(stage)">
+              {{ "MEMBER_QUEST.check" | translate }}
+            </button>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </li>
+</ul>
+<div *ngIf="questList.length == 0" class="no-data">
+  {{ "NO_DATA" | translate }}
+</div>

@@ -1,0 +1,312 @@
+.scroll-wrap {
+  height: calc(100vh - 45px - 47px);
+  overflow-x: hidden;
+  background: #fff;
+  padding: 11px 0 0;
+}
+
+.white-bg {
+  background: #fff;
+  margin: 0 0 10px;
+  font-weight: bold;
+
+  &:last-child {
+    margin: 0;
+  }
+}
+
+button,
+.total {
+  width: 92.27vw;
+  height: 10.93vw;
+}
+
+.operate {
+  padding: 13px 14px;
+
+  .helf {
+    width: 50%;
+
+    p {
+      margin: 0 0 5px;
+      font-size: 13px;
+      letter-spacing: 1px;
+      color: #000000;
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 44.27vw;
+      height: 11.2vw;
+      padding: 0 15px 0 13px;
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      border-radius: 3px;
+      // text-align: left;
+
+      i {
+        width: 9px;
+        height: 4px;
+        background: url("~src/assets/img/select.svg") no-repeat;
+      }
+    }
+  }
+}
+
+form {
+  width: 92.27vw;
+
+  li {
+    width: 100%;
+    margin-bottom: 20px;
+
+    & > p {
+      font-size: 13px;
+      font-weight: bold;
+      color: #000000;
+      margin: 10px 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .type-selector {
+    width: 100%;
+    height: 42px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+  }
+
+  .date-selector {
+    // width: 100%;
+    height: 42px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #666666;
+    display: flex;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+
+    & > input {
+      width: 43%;
+      border: none !important;
+      padding: 0;
+    }
+
+    & > span {
+      width: 5%;
+      line-height: 42px;
+      text-align: center;
+    }
+
+    & > div {
+      width: 15%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+
+      i {
+        width: 20px;
+        height: 100%;
+        background: url("~src/assets/img/date.svg") no-repeat;
+        background-position: center;
+        background-size: contain;
+      }
+    }
+  }
+
+  .date-box {
+    display: flex;
+    justify-content: center;
+    border-radius: 25px;
+
+    button {
+      width: 25%;
+      height: 38px;
+      font-size: 15px;
+      font-weight: bold;
+      color: #808080;
+      border-radius: 0;
+
+      &:first-child {
+        border-radius: 3px 0 0 3px;
+      }
+
+      &:last-child {
+        border-radius: 0 3px 3px 0;
+      }
+    }
+
+    button.orange_btn {
+      color: white;
+    }
+  }
+
+  .btn-confirm {
+    width: 100%;
+    height: 41px;
+  }
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 13px;
+  margin: 0 auto;
+  border: 1px solid #b39b80;
+  border-radius: 5px;
+  background: #f9f1e4;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #94733e;
+
+  i {
+    width: 4.27vw;
+    height: 4.27vw;
+    margin: 0 10px 0 0;
+    background: url("~src/assets/img/marvel_orange.svg") no-repeat center
+      center;
+  }
+}
+
+.logs {
+  padding: 10px 14px;
+
+  & > li {
+    margin: 0 0 10px 0;
+  }
+
+  .cnt {
+    margin: 0 0 10px 0;
+    .result {
+      color: #f00;
+    }
+
+    .title {
+      font-size: 21px;
+      padding: 13px 20px;
+      letter-spacing: 1px;
+      color: #000;
+    }
+
+    .detail-data,
+    .data {
+      margin: 0 0 10px 0;
+      font-size: 13px;
+
+      & > li {
+        display: flex;
+        justify-content: space-between;
+        line-height: 1;
+
+        padding: 6px 20px;
+
+        p {
+          &:first-child {
+            font-size: 14px;
+            // line-height: 27px;
+            letter-spacing: 1px;
+            color: #4d4d4d;
+          }
+        }
+      }
+    }
+
+    .detail-data {
+      border-top: solid 1px #b49c64;
+      padding-top: 8px;
+    }
+
+    button {
+      width: 100%;
+      height: 35px;
+      font-size: 13px;
+      letter-spacing: 1px;
+      background: none;
+      border-top: 1px solid #b8a373;
+
+      i {
+        display: inline-block;
+        width: 9px;
+        height: 16px;
+        position: relative;
+        top: 3px;
+        left: 12px;
+        transition: transform 500ms ease 0s;
+        background: url("~src/assets/img/new/arrow_b.png") no-repeat;
+        background-size: 100%;
+        transform: rotate(-90deg);
+
+        &.isOpen {
+          transform: rotate(90deg);
+        }
+      }
+    }
+  }
+
+  .detail-wrap {
+    height: 0;
+    overflow: auto;
+    transition: height 500ms;
+    background: #fffbf5;
+
+    div {
+      margin-bottom: 7px;
+    }
+
+    .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .date {
+      flex: 1;
+      font-size: 14px;
+      text-align: right;
+      color: #4d4d4d;
+    }
+
+    &.isOpen {
+      height: 357px;
+      padding: 12px 8px;
+    }
+  }
+}
+
+.no-data {
+  text-align: center;
+}
+
+app-select-alert {
+  .dialog ul li:first-child {
+    width: 85.5vw;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .logs .detail-wrap {
+    .title {
+      font-size: 18px;
+    }
+
+    .date {
+      font-size: 12px;
+    }
+  }
+}
+.empty-data {
+  width: 92.27vw;
+  font-size: 14px;
+  font-weight: bold;
+  color: #999999;
+  display: flex;
+  justify-content: center;
+  padding: 80px;
+}

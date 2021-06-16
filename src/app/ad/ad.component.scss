@@ -1,0 +1,71 @@
+// .ad {
+//   position: relative;
+//   display: flex;
+//   justify-content: center;
+//   width: 100vw;
+//   padding: 8px 0 0;
+// }
+
+// .content {
+//   width: 97.06vw;
+//   height: 43.73vw;
+//   overflow: hidden;
+// }
+
+// .photo {
+//   display: flex;
+//   transition: transform 500ms ease 0s;
+
+//   li {
+//     flex-shrink: 0;
+//     width: 97.06vw;
+//     height: 43.73vw;
+//     border-radius: 5px;
+//     overflow: hidden;
+//     background-position: center center;
+//     background-size: cover !important;
+//     background-repeat: no-repeat !important;
+//   }
+// }
+
+// .page-box {
+//   position: absolute;
+//   left: 0;
+//   bottom: 9px;
+// }
+
+// .glow {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   opacity: 0;
+//   pointer-events: none;
+//   background: rgba(255, 255, 255, 0.3);
+
+//   &.active {
+//     animation: fadeinout 1s ease-out forwards;
+//   }
+
+//   @keyframes fadeinout {
+
+//     0%,
+//     100% {
+//       opacity: 0;
+//     }
+
+//     40% {
+//       opacity: 1;
+//     }
+//   }
+// }
+.c-container {
+  position: relative;
+  width: 100%;
+  padding-top: 45%;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}

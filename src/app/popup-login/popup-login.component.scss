@@ -1,0 +1,88 @@
+.dialog {
+  width: 87.2vw;
+  padding: 0 0 16vw;
+
+  .title {
+    height: 18.67vw;
+
+    .icon {
+      width: 8.6vw;
+      height: 9vw;
+      margin: 0 16px 0 0;
+      background: url("~src/assets/img/new/loginIC.png") no-repeat center center;
+      background-size: 96%;
+    }
+  }
+}
+
+input {
+  width: 77.6vw;
+  height: 9.87vw;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  label {
+    position: relative;
+
+    .err {
+      position: absolute;
+      bottom: -19px;
+      left: 0;
+    }
+
+    &:nth-child(1) {
+      margin: 11.73vw 0 8vw;
+    }
+  }
+
+  .forget {
+    display: flex;
+    justify-content: flex-end;
+    width: 77.6vw;
+    margin: 10px 0 0;
+    font-size: 12px;
+    color: #af8c50;
+
+    span {
+      margin: 0 2px;
+      text-decoration: underline;
+    }
+  }
+
+  button {
+    width: 77.6vw;
+    height: 11.2vw;
+    margin: 10.13vw 0 8vw;
+  }
+
+  .pwd {
+    img {
+      position: absolute;
+      top: calc((9.87vw - 4.26vw) / 2);
+      right: 10px;
+      width: 6.13vw;
+      height: 4.26vw;
+      z-index: 3;
+    }
+  }
+}
+
+.register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #595757;
+
+  p {
+    margin: 0 0 0 10px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #c39f66;
+  }
+}

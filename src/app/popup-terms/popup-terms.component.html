@@ -1,0 +1,12 @@
+<div class="mask">
+  <div class="dialog">
+    <div class="title">
+      <p>{{ "RULE.TITLE" | translate }}</p>
+      <i (click)="close()"></i>
+    </div>
+    <div class="overflow" [innerHTML]="'ABOUT.TERMS.CNT' | translate"></div>
+    <button class="orange_btn" (click)="agree()">
+      {{ "RULE.agree" | translate }}
+    </button>
+  </div>
+</div>

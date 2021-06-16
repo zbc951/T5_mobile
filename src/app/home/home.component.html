@@ -1,0 +1,23 @@
+<app-ad></app-ad>
+<app-announcement></app-announcement>
+<app-member-board></app-member-board>
+<div class="home-center">
+  <ul class="games">
+    <li *ngFor="let item of platforms" (click)="click(item)">
+      <div [style.background-image]="'url(' + item.indexImgUrl + ')'"></div>
+      <p>{{ item.name }}</p>
+    </li>
+
+    <!-- fish -->
+    <li (click)="click(GameTypeKey.Fishing)">
+      <div [style.background-image]="'url(assets/img/types/fish.png)'"></div>
+      <p>{{ "GAMETYPE.FISH" | translate }}</p>
+    </li>
+
+    <!-- board -->
+    <!-- <li (click)="click(GameTypeKey.Board)">
+      <div [style.background-image]="'url(assets/img/types/board.png)'"></div>
+      <p>{{ "GAMETYPE.CASUAL" | translate }}</p>
+    </li> -->
+  </ul>
+</div>

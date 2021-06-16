@@ -1,0 +1,71 @@
+<div class="scroll-wrap" appList (gotBottom)="onBtm($event)">
+  <div class="search-contain">
+    <!-- <form [formGroup]="form" (ngSubmit)="searchReview()"> -->
+    <form [formGroup]="form" appThrottle (action)="searchReview()">
+      <ul>
+        <li>
+          <p>{{ "BET_LOG.PLATFORM" | translate }}</p>
+          <select class="type-selector" formControlName="platformId">
+            <option value="all">
+              {{ "BET_LOG.ALL_PLATFORM" | translate }}
+            </option>
+            <option *ngFor="let item of gamePlatforms" [value]="item.id">
+              {{ item.name }}
+            </option>
+          </select>
+        </li>
+        <li>
+          <p>{{ "REVIEW_RECORD.SEARCH.COL-DATE" | translate }}</p>
+          <div class="date-selector">
+            <input type="date" formControlName="startTime" />
+            <span>~</span>
+            <input type="date" formControlName="endTime" />
+            <!-- <div><i></i></div> -->
+          </div>
+        </li>
+        <li>
+          <app-date-selector (timeEvt)="setTime($event)"></app-date-selector>
+        </li>
+        <li>
+          <button class="btn-confirm orange_btn">
+            {{ "REVIEW_RECORD.SEARCH.CONFIRM" | translate }}
+          </button>
+        </li>
+      </ul>
+    </form>
+  </div>
+  <div class="review-body">
+    <div class="empty-data" *ngIf="listData.length === 0">
+      {{ "NO_DATA" | translate }}
+    </div>
+    <div class="record panel-style" *ngFor="let item of listData">
+      <ul>
+        <li class="r-header">{{ item.name }}</li>
+        <li class="r-body">
+          <ul class="r-detail">
+            <li>
+              <span> {{ "MEMBER_QUEST.buy_at" | translate }}</span>
+              <span>{{ item.createdAt }}</span>
+            </li>
+            <li>
+              <span> {{ "MEMBER_QUEST.buy_price" | translate }}</span>
+              <span>{{ item.price }}</span>
+            </li>
+            <li>
+              <span> {{ "MEMBER_WITHDRAW.record_th.limit" | translate }}</span>
+              <span>{{ item.waterLimit }}</span>
+            </li>
+            <li>
+              <span>{{ "MEMBER_QUEST.NOW_BETAMOUNT" | translate }}</span>
+              <span>{{ item.currentWater }}</span>
+            </li>
+            <li>
+              <span>{{ "MEMBER_QUEST.REWARD" | translate }}</span>
+              <span>{{ item.points }}</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

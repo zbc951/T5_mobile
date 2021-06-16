@@ -1,0 +1,635 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$tb-pc-primary: mat-palette($mat-indigo);
+$tb-pc-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$tb-pc-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$tb-pc-theme: mat-light-theme(
+  (
+    color: (
+      primary: $tb-pc-primary,
+      accent: $tb-pc-accent,
+      warn: $tb-pc-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($tb-pc-theme);
+@import "scss/reset";
+@import "scss/layout";
+@import "scss/com_gradient";
+@import "scss/bootstrap_carousel";
+@import "scss/md.scss";
+
+.main-wrap {
+  width: 100%;
+  min-height: 100vh;
+  padding: 45px 0 47px;
+  font-weight: bold;
+  overflow-x: hidden;
+
+  .bg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: url("~src/assets/img/new/bg.jpg") no-repeat top center;
+    background-size: cover;
+    z-index: -999;
+  }
+}
+
+.gray-btn-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #b18e56;
+  border-radius: 5px;
+}
+
+.panel-style {
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 2px 3px 0px #dedede;
+  border: solid 1px #957222;
+  color: #a07d44;
+}
+
+.orange_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to top, #d8be86 0%, #f0e4ad 92%);
+  border: solid 1px #54401f;
+  border-radius: 3px;
+  color: #7c5625;
+
+  &:hover,
+  &:active,
+  &.active {
+    background: linear-gradient(to top, #e8cb8e 0%, #a17d44 100%);
+    color: #fff;
+  }
+
+  &:disabled.review {
+    color: #f44336;
+    background: #fff9f9 !important;
+    border: 1px solid currentColor !important;
+  }
+}
+
+.gray_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(#ffffff 40%, #f4f4f4 100%);
+  border: solid 1px #957222;
+  border-radius: 3px;
+  &:active {
+    background: linear-gradient(to top, #ffffff 40%, #f4f4f4 100%);
+  }
+}
+
+.white_orange_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+
+  border: 1px solid #cfa678;
+  border-radius: 3px;
+  color: #cfa678;
+}
+
+.white_red_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+
+  border: 1px solid #3d4cce;
+  border-radius: 3px;
+  color: #3d4cce;
+}
+
+.gray_orange_frame_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(#ffffff 40%, #f4f4f4 100%);
+
+  &:active {
+    background: linear-gradient(to top, #ffffff 40%, #f4f4f4 100%);
+  }
+
+  border: 1px solid #cc8b43;
+  border-radius: 3px;
+  color: #000;
+}
+
+button:disabled {
+  background: #ccc !important;
+  border: none !important;
+  cursor: not-allowed;
+  color: #fff;
+}
+
+input[type="date"] {
+  // background: none;
+  text-align: right;
+  // outline: 1px solid pink;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select {
+  border: solid 1px #a7854d;
+  border-radius: 3px;
+  padding: 0 0 0 15px;
+  background: none;
+}
+
+.mask {
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  z-index: 100;
+}
+
+.dialog {
+  background: #fff;
+  border-radius: 5px;
+
+  .title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 10.61vw;
+    font-size: 21px;
+    // background: #3d4cce;
+    border-radius: 5px 5px 0 0;
+    color: #fff;
+    background: url("~src/assets/img/new/loginTop.jpg") no-repeat top center;
+    background-size: cover;
+
+    i {
+      position: absolute;
+      top: calc((10.61vw - 4.73vw) / 2);
+      right: 5.38vw;
+      width: 4.73vw;
+      height: 4.73vw;
+      background: url("~src/assets/img/close.svg") no-repeat center center;
+    }
+  }
+
+  hr {
+    border: 1px solid #d7d8d8;
+  }
+}
+
+form {
+  .tips,
+  .err {
+    // padding: 0 0 0 96px;
+    line-height: 1.8;
+    text-align: left;
+  }
+
+  .tips {
+    font-size: 12px;
+    color: #999;
+  }
+
+  .err {
+    font-size: 12px;
+    color: #ff0000;
+  }
+
+  select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, #7c5625 50%),
+      linear-gradient(135deg, #7c5625 50%, transparent 50%);
+    background-position: calc(100% - 20px) calc(1em + 2px),
+      calc(100% - 15px) calc(1em + 2px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+  }
+
+  .form-row {
+    display: flex;
+    align-items: center;
+    margin: 0 0 8.53vw;
+
+    .item {
+      margin: 0 13.33vw 0 0;
+    }
+  }
+}
+
+.no-data {
+  letter-spacing: 1px;
+  color: #999;
+}
+
+.page-block {
+  height: 66px;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  padding: 7px 0;
+
+  & > p {
+    font-size: 13px;
+    text-align: center;
+    color: #808080;
+  }
+
+  .pagination {
+    .ngx-pagination {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 7px;
+
+      .current {
+        background: #008599;
+        border-radius: 3px;
+      }
+    }
+  }
+}
+
+.maintain-blur {
+  filter: blur(2px);
+  position: relative;
+  z-index: 0;
+}
+
+app-maintain-tip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+
+  .maintain {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    line-height: 1.5;
+    text-align: center;
+    letter-spacing: 2px;
+    background: rgb(0 0 0 / 62%);
+    text-shadow: 1px 2px 4px #d08016;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .status,
+    pre {
+      color: #fff !important;
+    }
+
+    .status {
+      margin: 0 0 10px 0;
+    }
+
+    pre {
+      font-size: 12px;
+    }
+  }
+}
+
+app-header {
+  @import "app/header/header.component.scss";
+}
+
+app-footer {
+  @import "app/footer/footer.component.scss";
+}
+
+app-home {
+  @import "app/home/home.component.scss";
+}
+
+app-member-board {
+  @import "app/member-board/member-board.component.scss";
+}
+
+app-announcement {
+  @import "app/announcement/announcement.component.scss";
+}
+
+app-ad {
+  @import "app/ad/ad.component.scss";
+}
+
+app-letter {
+  @import "app/letter/letter.component.scss";
+}
+
+app-pagination-box {
+  @import "app/pagination-box/pagination-box.component.scss";
+}
+
+app-letter-detail {
+  @import "app/letter-detail/letter-detail.component.scss";
+}
+
+app-slot-center {
+  @import "app/slot-center/slot-center.component.scss";
+}
+
+app-popup-transfer {
+  @import "app/popup-transfer/popup-transfer.component.scss";
+}
+
+app-vip {
+  @import "app/vip/vip.component.scss";
+}
+
+app-popup-vip-point {
+  @import "app/popup-vip-point/popup-vip-point.component.scss";
+}
+
+app-quest-center {
+  @import "app/quest-center/quest-center.component.scss";
+}
+
+app-quest-detail {
+  @import "app/quest-detail/quest-detail.component.scss";
+}
+
+app-popup-login {
+  @import "app/popup-login/popup-login.component.scss";
+}
+
+app-amount-record,
+app-old-quest-center,
+app-review-main {
+  .scroll-wrap {
+    // outline: 1px solid pink;
+    height: calc(100vh - 45px - 40px - 47px - 10px);
+    margin: 10px 0 0 0;
+    overflow-x: hidden;
+  }
+
+  @import "app/review-main/review-main.component.scss";
+}
+
+app-review {
+  @import "app/review/review.component.scss";
+}
+
+app-popup-register {
+  @import "app/popup-register/popup-register.component.scss";
+}
+
+app-review-bonus {
+  @import "app/review-bonus/review-bonus.component.scss";
+}
+
+app-review-wallet {
+  @import "app/review-wallet/review-wallet.component.scss";
+}
+
+app-popup-bulletin {
+  @import "app/popup-bulletin/popup-bulletin.component.scss";
+}
+
+app-help {
+  @import "app/help/help.component.scss";
+}
+
+app-member-center {
+  @import "app/member-center/member-center.component.scss";
+}
+
+app-vip-detail {
+  @import "app/vip-detail/vip-detail.component.scss";
+}
+
+app-bank-card {
+  @import "app/bank-card/bank-card.component.scss";
+}
+
+app-my-wallet {
+  @import "app/my-wallet/my-wallet.component.scss";
+}
+
+app-coupon-wallet {
+  @import "app/coupon-wallet/coupon-wallet.component.scss";
+}
+
+app-platform-wallet {
+  @import "app/platform-wallet/platform-wallet.component.scss";
+}
+
+app-transfer {
+  @import "app/transfer/transfer.component.scss";
+}
+
+app-user-info {
+  @import "app/user-info/user-info.component.scss";
+}
+
+app-deposit {
+  @import "app/deposit/deposit.component.scss";
+}
+
+app-common-alert {
+  @import "app/common-alert/common-alert.component.scss";
+}
+
+app-withdraw {
+  @import "app/withdraw/withdraw.component.scss";
+}
+
+app-user-info-platform {
+  @import "app/user-info-platform/user-info-platform.component.scss";
+}
+
+app-bet-log {
+  @import "app/bet-log/bet-log.component.scss";
+}
+
+app-select-alert {
+  @import "app/select-alert/select-alert.component.scss";
+}
+
+app-date-selector {
+  @import "app/date-selector/date-selector.component.scss";
+}
+
+app-popup-forget-password {
+  @import "app/popup-forget-password/popup-forget-password.component.scss";
+}
+
+app-join-us {
+  @import "app/join-us/join-us.component.scss";
+}
+
+app-popup-terms {
+  @import "app/popup-terms/popup-terms.component.scss";
+}
+
+app-download-app {
+  @import "app/download-app/download-app.component.scss";
+}
+
+app-popup-edit-pwd {
+  @import "app/popup-edit-pwd/popup-edit-pwd.component.scss";
+}
+
+// app-old-quest-center {
+//   @import "app/old-quest-center/old-quest-center.component.scss";
+// }
+
+app-combine-quest-apply {
+  width: 100%;
+
+  @import "app/combine-quest-apply/combine-quest-apply.component.scss";
+}
+
+app-quest-record {
+  @import "app/quest-record/quest-record.component.scss";
+}
+
+app-amount-record {
+  width: 100%;
+  background: #fff;
+  @import "app/amount-record/amount-record.component.scss";
+}
+
+app-activity-log,
+app-drawback,
+app-withdraw-bet-record {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  z-index: 999;
+}
+
+app-activity-log {
+  @import "app/amount-record/amount-record.component.scss";
+
+  .panel {
+    .title {
+      font-size: 20px;
+      padding: 0;
+    }
+    .table ul li {
+      width: 100%;
+    }
+  }
+  .no-data {
+    line-height: 80px;
+    text-align: center;
+  }
+}
+
+app-user-info-set-phone {
+  @import "app/user-info-set-phone/user-info-set-phone.component.scss";
+}
+
+app-loading {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+
+  .panel {
+    // width: 400px;
+    width: 80vw;
+    height: 256px;
+    font-weight: bold;
+    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .header {
+    height: 50px;
+    line-height: 50px;
+    font-size: 21px;
+    letter-spacing: 2px;
+    color: #fff;
+    background: url("~src/assets/img/new/loginTop.jpg") no-repeat;
+    background-size: cover;
+  }
+
+  .cnt {
+    height: 206px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 44px;
+    text-align: center;
+    color: #4d4d4d;
+    // outline: 1px solid pink;
+  }
+
+  i {
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    background: url("~src/assets/img/loading_b.svg");
+    animation: spiner 1.2s linear infinite;
+    margin: 0 0 30px 0;
+  }
+
+  @keyframes spiner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+/* Importing Bootstrap SCSS file. */
+// @import '~bootstrap/scss/bootstrap';

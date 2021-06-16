@@ -1,0 +1,148 @@
+<div
+  style="
+    background-color: #f8f8f8;
+    min-height: calc(100vh - 45px - 47px);
+    padding: 0 0 10px;
+  "
+>
+  <div class="white-bg">
+    <div class="board g-13">
+      <div class="content">
+        <div>
+          <div class="account">
+            {{ mine?.name }}
+          </div>
+          <div class="text">
+            {{ "VIP.current_amount" | translate }}:
+            <p>${{ mine2?.total_deposit | number: "1.0-2" }}</p>
+            ({{ mine2?.total_deposit | number: "1.0-2" }}/{{
+              mine.upgradeByDeposit | number: "1.0-2"
+            }})
+          </div>
+          <div class="text">
+            {{ "VIP.current_point" | translate }}:
+            <p>${{ mine2?.total_bet | number: "1.0-2" }}</p>
+            ( {{ mine2?.total_bet | number: "1.0-2" }}/{{
+              mine?.upgradeByTotalBetAmount | number: "1.0-2"
+            }})
+          </div>
+        </div>
+        <div class="medal" [ngClass]="'lv-' + mineIdx"></div>
+      </div>
+      <div class="experience-bar">
+        <div class="level">
+          <p class="cur">
+            {{ mine?.name }}
+          </p>
+          <p>
+            {{ next?.name }}
+          </p>
+        </div>
+        <div class="bar">
+          <div class="cur" [style.width.%]="amountPercent">
+            <div class="dialog" *ngIf="amountPercent > 0">
+              <p>
+                {{ amountPercent | number: "1.0-2" }}%
+                <i class="arrow"></i>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="level-box">
+      <div>
+        <hr />
+      </div>
+      <ul #lvbox>
+        <li
+          *ngFor="let item of rankList | slice: 0:8; let i = index"
+          [ngClass]="{ cur: i === curPage }"
+          (click)="levelChange(i)"
+        >
+          {{ "VIP.DETAIL.LEVEL." + i | translate }}
+        </li>
+        <!-- <li>{{ "VIP.DETAIL.LEVEL.0" | translate }}</li>
+        <li>{{ "VIP.DETAIL.LEVEL.1" | translate }}</li>
+        <li>{{ "VIP.DETAIL.LEVEL.2" | translate }}</li>
+        <li>{{ "VIP.DETAIL.LEVEL.3" | translate }}</li>
+        <li>{{ "VIP.DETAIL.LEVEL.4" | translate }}</li>
+        <li>{{ "VIP.DETAIL.LEVEL.5" | translate }}</li> -->
+      </ul>
+    </div>
+    <div class="cards">
+      <i></i>
+      <div
+        class="content"
+        (touchstart)="touchS($event)"
+        (touchend)="touchE($event)"
+      >
+        <ul #partnersList>
+          <li
+            #list
+            *ngFor="let item of rankList | slice: 0:8; let i = index"
+            [ngClass]="'lv-' + i"
+          >
+            <div class="medal" [ngClass]="'lv-' + i"></div>
+            <div class="text">
+              {{ "VIP.upgradeByDeposit" | translate }}
+              <p>{{ item.upgradeByDeposit | floatDisplay }}</p>
+            </div>
+            <!-- <div class="text">
+              {{ "VIP.upgradeByWithdraw" | translate }}
+              <p>{{ item.upgradeByWithdraw | floatDisplay }}</p>
+            </div> -->
+            <div class="text">
+              {{ "VIP.upgradeByTotalBetAmount" | translate }}
+              <p>{{ item.upgradeByTotalBetAmount | floatDisplay }}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <i></i>
+    </div>
+  </div>
+  <div class="white-bg enjoy">
+    <div class="enjoy-title">{{ mine?.name }}{{ "VIP.enjoy" | translate }}</div>
+    <ul>
+      <li>
+        {{ "VIP.enjoy-content.hight-deposit" | translate }}
+        <p>
+          {{
+            mine?.depositPerMax * mine?.depositDayTimes == 0
+              ? ("MEMBER_WITHDRAW.NO_LIMIT" | translate)
+              : (mine?.depositPerMax * mine?.depositDayTimes | floatDisplay)
+          }}
+        </p>
+      </li>
+      <li>
+        {{ "VIP.enjoy-content.hight-withdraw" | translate }}
+        <p>
+          {{
+            mine?.withdrawPerMax * mine?.withdrawDayTimes == 0
+              ? ("MEMBER_WITHDRAW.NO_LIMIT" | translate)
+              : (mine?.withdrawPerMax * mine?.withdrawDayTimes | floatDisplay)
+          }}
+        </p>
+      </li>
+
+      <li>
+        {{ "VIP.fee." + mine?.withdrawFeePeriod | translate
+        }}{{ "VIP.fee.free" | translate }}
+        <p>
+          {{
+            mine?.withdrawFreeTimes == 0
+              ? ("MEMBER_WITHDRAW.NO_LIMIT" | translate)
+              : (mine?.withdrawFreeTimes | floatDisplay)
+          }}
+        </p>
+      </li>
+    </ul>
+  </div>
+  <div class="white-bg detail" routerLink="/{{ AppRoutes.VIP_DETAIL }}">
+    <p>
+      {{ "VIP.DETAIL.TITLE" | translate }}
+      <i></i>
+    </p>
+  </div>
+</div>

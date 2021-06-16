@@ -1,0 +1,51 @@
+<div class="type-selector">
+  <ul class="nav" *ngIf="url != AppRoutes.Activity_Wallet">
+    <li
+      class="all"
+      [class.active]="selected === tabs.ALL"
+      (click)="selectType(tabs.ALL)"
+    >
+      <i></i><span>{{ "QUEST_CENTER.NAV-ALL" | translate }}</span>
+    </li>
+    <li
+      *ngFor="let item of questTypes"
+      class="all"
+      [class.active]="selected === item.id"
+      (click)="selectType(item.id)"
+    >
+      <i></i><span>{{ item.name }}</span>
+    </li>
+  </ul>
+</div>
+<div class="quest-list" appList (gotBottom)="onBtm($event)">
+  <ul>
+    <li *ngFor="let item of listData">
+      <div class="quest-box panel-style">
+        <div class="quest-cover">
+          <img [src]="item.image" [alt]="item.name" />
+        </div>
+        <p class="quest-btn">
+          <button
+            class="btn-check"
+            (click)="goDetail(item)"
+            [disabled]="item.informationDisplay == 0"
+          >
+            {{ "QUEST_CENTER.BTN-CHECK" | translate }}
+          </button>
+          <!-- (click)="buy(item)" -->
+          <button
+            *ngIf="url == AppRoutes.Activity_Wallet"
+            class="btn-buy orange_btn"
+            [disabled]="item.canBuy !== 'yes'"
+            appThrottle
+            (action)="buy(item)"
+          >
+            <ng-container *ngIf="item.type == Activity_type.fixed">
+              ${{ item.price }}</ng-container
+            >{{ "QUEST_CENTER.BTN-BUY" | translate }}
+          </button>
+        </p>
+      </div>
+    </li>
+  </ul>
+</div>

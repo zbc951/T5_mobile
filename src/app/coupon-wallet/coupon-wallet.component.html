@@ -1,0 +1,106 @@
+<div style="padding: 0 0 15px">
+  <div class="title">
+    {{ "MY-WALLET.update" | translate }}:2020/06/19 05:05:24PM
+    <i *ngIf="type !== 'transfer'"></i>
+  </div>
+  <ul class="list" [ngClass]="{ isOpen: isOpen }">
+    <li *ngFor="let item of data" class="panel-style">
+      <div class="li-title">{{ item.name }}#{{ item.id }}</div>
+      <div class="bar-box">
+        <!-- <div class="point">
+          <p>{{ item.currentWater }}</p>
+          <p>{{ item.waterLimit }}</p>
+        </div> -->
+        <!-- <div class="bar">
+          <div
+            class="cur"
+            [style.width.%]="(item.currentWater / item.waterLimit) * 100"
+          ></div>
+        </div> -->
+        <p class="not-finish" *ngIf="item.currentWater < item.waterLimit">
+          {{ "TRANSFER.CENTER-WALLET-LIST.NOTICE" | translate }}({{
+            item.currentWater
+          }}
+          / {{ item.waterLimit }})
+        </p>
+        <p class="finish" *ngIf="item.currentWater >= item.waterLimit">
+          {{ "TRANSFER.CENTER-WALLET-LIST.FINISH" | translate }}({{
+            item.currentWater
+          }}
+          / {{ item.waterLimit }})
+        </p>
+      </div>
+      <div class="item">
+        <div class="item-title">
+          {{ "TRANSFER.CENTER-WALLET-LIST.DEADLINE" | translate }}
+        </div>
+        {{ item.endAt ? item.endAt : ("MEMBER_QUEST.NO_LIMIT" | translate) }}
+      </div>
+      <div class="item">
+        <div class="item-title">
+          {{ "TRANSFER.CENTER-WALLET-LIST.BALANCE" | translate }}
+        </div>
+        {{ item.currentPoints }}
+      </div>
+      <div class="coupon-btn-group">
+        <button class="white_orange_btn" (click)="checkoutLog(item.id)">
+          {{ "TRANSFER.CENTER-WALLET-LIST.RECORD" | translate }}
+        </button>
+        <ng-container
+          *ngIf="
+            (item.currentPoints == 0 ||
+              (item.currentPoints <= item.limitGiveUp &&
+                !(
+                  item.currentWater >= item.waterLimit && item.waterLimit != 0
+                ) &&
+                item.limitGiveUp != 0)) &&
+              item.status == 'enabled' &&
+              item.isReceive == 0;
+            else transin
+          "
+        >
+          <button class="white_red_btn" appThrottleBtn (action)="giveup(item)">
+            {{ "TRANSFER.CENTER-WALLET-LIST.GIVE-UP" | translate }}
+          </button>
+        </ng-container>
+        <ng-template #transin>
+          <button
+            class="white_red_btn"
+            [disabled]="
+              !(item.currentWater >= item.waterLimit) ||
+              item.isReceive !== 0 ||
+              item.currentPoints == 0 ||
+              item.status == 'cancel' ||
+              item.isOverdue
+            "
+            appThrottle
+            (action)="transIn(item)"
+          >
+            <!-- 這邊判斷 status 給 history 用 -->
+            {{
+              item.status == "cancel"
+              ? ("TRANSFER.CENTER-WALLET-LIST.CANCEL" | translate)
+              : item.status == "giveUp" &&
+                !(
+                  item.currentWater >= item.waterLimit && item.waterLimit != 0
+                )
+              ? ("TRANSFER.CENTER-WALLET-LIST.GIVE-UP" | translate)
+              : ("TRANSFER.CENTER-WALLET-LIST.BACK-CENTER" | translate)
+            }}
+          </button>
+        </ng-template>
+      </div>
+    </li>
+  </ul>
+  <div class="open" *ngIf="data.length > 3">
+    <div style="display: flex; align-items: center" (click)="open()">
+      {{ "TRANSFER.OPEN" | translate }}
+      <i [ngClass]="{ isOpen: isOpen }"></i>
+    </div>
+  </div>
+</div>
+<app-activity-log
+  *ngIf="isActivityLogShow"
+  [logId]="activityLogId"
+  (closeEvt)="closePopup($event)"
+></app-activity-log>

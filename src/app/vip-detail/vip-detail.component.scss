@@ -1,0 +1,158 @@
+.markdown-body {
+  font-family: inherit;
+  ul {
+    padding-left: 0;
+    list-style: none;
+  }
+
+  h2 {
+    width: 100%;
+    font-size: 17px;
+    color: #b38f59;
+    margin: 26px 0 11px 18px;
+  }
+}
+
+.notice {
+  ul {
+    padding: 15px 5px;
+    color: #6d6d6d;
+
+    li {
+      margin: 0 0 15px;
+    }
+  }
+}
+
+.table {
+  position: relative;
+  @extend .panel-style;
+  width: 94vw;
+  margin: 0 auto;
+  // margin-bottom: 46px;
+  color: #734e1f;
+
+  ul {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    li {
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      font-size: 14px;
+      position: relative;
+
+      &:nth-child(even) {
+        background-color: #f7ede1;
+      }
+
+      &:first-child {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #734e1f;
+        border-bottom: solid 1px #b29960;
+      }
+    }
+  }
+}
+
+.vip_name {
+  width: 18.4vw;
+  float: left;
+
+  ul,
+  li {
+    width: 18.4vw;
+  }
+
+  li {
+    &:not(:first-child) {
+      font-size: 14px;
+      color: #4d4d4d;
+    }
+  }
+}
+
+.vip_data {
+  width: 73.6vw;
+  display: inline-block;
+  overflow: scroll;
+
+  div {
+    display: flex;
+  }
+
+  ul {
+    width: 36.8vw;
+  }
+
+  li {
+    position: relative;
+    width: 36.8vw;
+
+    &:not(:first-child) {
+      font-size: 14px;
+      color: #4d4d4d;
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      width: 1px;
+      height: 15px;
+      position: absolute;
+      top: 12px;
+      left: 0;
+      background: #d0bda7;
+    }
+  }
+
+  .up {
+    margin: 0 auto;
+    display: block;
+    width: 86%;
+    line-height: 20px;
+  }
+
+  .w100 {
+    width: 100%;
+  }
+}
+
+.arr_l,
+.arr_r {
+  display: inline-block;
+  width: 20px;
+  height: 95%;
+  position: absolute;
+  top: 50%;
+  left: 18vw;
+  transform: translateY(-50%);
+  background: #fff;
+  z-index: 2;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: url("~src/assets/img/new/arrow_b.png") no-repeat;
+    background-size: 100%;
+  }
+}
+
+.arr_r {
+  left: 88vw;
+
+  &::before {
+    transform: scaleX(-1) translate(50%, -50%);
+  }
+}

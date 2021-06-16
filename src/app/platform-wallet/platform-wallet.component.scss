@@ -1,0 +1,89 @@
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  // justify-content: flex-end;
+  padding: 8px 15px 0;
+  margin: 0 0 11px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: #a67c52;
+
+  button {
+    width: 18.93vw;
+    height: 6.13vw;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  padding: 0 3.6vw 0;
+  overflow: hidden;
+
+  li {
+    margin: 0px 1.9vw 12px 0px;
+
+    &:nth-of-type(3n) {
+      margin-right: 0px;
+    }
+  }
+
+  .gray-btn-frame {
+    display: block;
+    width: 29.66vw;
+    // height: 16.53vw;
+    min-height: 16.53vw;
+    padding: 2.5vw 0 0 11px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #4d4d4d;
+
+    .balance {
+      margin: 1.5vw 0 0;
+      font-size: 17px;
+      letter-spacing: 0px;
+      word-break: break-all;
+      color: #000000;
+    }
+  }
+
+  &.isOpen {
+    max-height: none;
+  }
+}
+
+.open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0 0;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: #000000;
+
+  i {
+    width: 12px;
+    height: 12px;
+    margin: 0 0 0 9px;
+    transition: transform 500ms ease 0s;
+    background: url("~src/assets/img/unfold.svg") no-repeat center center;
+
+    &.isOpen {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  ul {
+    .gray-btn-frame {
+      p {
+        margin: 0;
+      }
+    }
+  }
+}

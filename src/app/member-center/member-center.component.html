@@ -1,0 +1,161 @@
+<div
+  style="
+    background-color: #f8f8f8;
+    padding: 0 0 10px;
+    min-height: calc(100vh - 45px - 47px);
+  "
+>
+  <div class="user white-bg">
+    <div class="info">
+      <div>
+        <div class="account">
+          <div class="vip">{{ lv }}</div>
+          {{ user.account }}
+        </div>
+        <p>{{ "JOIN_DAYS" | translate: { days: user.survival_day } }}</p>
+      </div>
+      <button
+        class="orange_btn info-btn"
+        [routerLink]="'/' + AppRoutes.USER_INFO"
+      >
+        <span> {{ "MEMBER_NAV.INFO" | translate }}</span>
+        <i></i>
+      </button>
+    </div>
+    <div class="wallet">
+      <p>
+        {{ "TRANSFER.CENTER-WALLET" | translate }}: $
+        {{ user.money | floatDisplay }}
+      </p>
+      <button class="orange_btn" [routerLink]="'/' + AppRoutes.DEPOSIT">
+        {{ "MEMBER_DEPOSIT.INFLY" | translate }}
+      </button>
+    </div>
+    <div class="btn-group" [class.no-vip]="!canUpgrade">
+      <button class="gray_btn" [routerLink]="'/' + AppRoutes.MY_WALLET">
+        <i></i>
+        <div class="text">
+          {{ "MEMBER_NAV.MY_WALLET" | translate }}
+          <p>MY PURSE</p>
+        </div>
+      </button>
+      <button
+        *ngIf="canUpgrade"
+        class="gray_btn"
+        [routerLink]="'/' + AppRoutes.VIP"
+      >
+        <i></i>
+        <div class="text">
+          {{ "VIP.vip" | translate }}
+          <p>VIP</p>
+        </div>
+      </button>
+    </div>
+    <ul>
+      <li [routerLink]="'/' + AppRoutes.BET_LOG">
+        <i></i>
+        <p>{{ "MEMBER_NAV.BET_LOG" | translate }}</p>
+      </li>
+      <li [routerLink]="'/' + AppRoutes.REVIEW_MAIN">
+        <i></i>
+        <p>{{ "MEMBER_NAV.TRANSFER_LOG" | translate }}</p>
+      </li>
+      <li class="relative" [routerLink]="'/' + AppRoutes.LETTER">
+        <i></i>
+        <p>{{ "LETTER.TITLE" | translate }}</p>
+        <em class="bubble" *ngIf="unread">{{ unread }}</em>
+      </li>
+      <li [routerLink]="'/' + AppRoutes.BANK_CARD">
+        <i></i>
+        <p>{{ "MEMBER_NAV.BANK" | translate }}</p>
+      </li>
+    </ul>
+  </div>
+
+  <!-- <div class="white-bg options quest" [routerLink]="'/' + AppRoutes.QUEST">
+    <div style="display: flex; align-items: center">
+      <i class="icon"></i>
+      <p>
+        {{ "COUPON" | translate }}
+      </p>
+    </div>
+    <i class="arrow"></i>
+  </div> -->
+  <div
+    *ngIf="isActivityWallet"
+    class="white-bg options quest"
+    [routerLink]="'/' + AppRoutes.Activity_Wallet"
+  >
+    <div style="display: flex; align-items: center">
+      <i class="icon"></i>
+      <p>
+        {{ "MEMBER_NAV.ACTIVITY_WALLET" | translate }}
+      </p>
+    </div>
+    <i class="arrow"></i>
+  </div>
+  <div
+    class="white-bg options queest-apply"
+    [routerLink]="'/' + AppRoutes.OLD_QUEST_CENTER"
+  >
+    <div style="display: flex; align-items: center">
+      <i class="icon"></i>
+      <p>
+        {{ "MEMBER_QUEST.APPLY_TAB" | translate }}
+      </p>
+    </div>
+    <i class="arrow"></i>
+  </div>
+
+  <div class="white-bg options help" [routerLink]="'/' + AppRoutes.HELP_CENTER">
+    <div style="display: flex; align-items: center">
+      <i class="icon"></i>
+      <p>
+        {{ "NAV.HELP" | translate }}
+      </p>
+    </div>
+    <i class="arrow"></i>
+  </div>
+  <div
+    class="white-bg options aboutus"
+    [routerLink]="'/' + AppRoutes.HELP_CENTER"
+    [queryParams]="{ tab: 'about' }"
+  >
+    <div style="display: flex; align-items: center">
+      <i class="icon"></i>
+      <p>
+        {{ "NAV.ABOUT" | translate }}
+      </p>
+    </div>
+    <i class="arrow"></i>
+  </div>
+  <!-- <div class="white-bg options joinus" [routerLink]="'/' + AppRoutes.JOIN_US">
+    <div style="display: flex; align-items: center">
+      <i class="icon"></i>
+      <p>
+        {{ "NAV.JOIN" | translate }}
+      </p>
+    </div>
+    <i class="arrow"></i>
+  </div> -->
+  <div
+    class="white-bg options download"
+    [routerLink]="'/' + AppRoutes.HELP_CENTER"
+    [queryParams]="{ tab: 'download' }"
+  >
+    <i class="icon"></i>
+    <p>{{ "NAV.download" | translate }}</p>
+  </div>
+  <div class="white-bg options lang" (click)="selectLang()">
+    <div style="display: flex; align-items: center">
+      <i class="icon"></i>
+      <p>{{ curLang.item.name }}</p>
+    </div>
+    <i class="arrow"></i>
+  </div>
+  <div class="white-bg options logout" (click)="logout()">
+    <i class="icon"></i>
+    <p>{{ "NAV.LOGOUT" | translate }}</p>
+  </div>
+</div>
+<app-select-alert></app-select-alert>

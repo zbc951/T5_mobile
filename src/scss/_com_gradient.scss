@@ -1,0 +1,109 @@
+// header
+.g-1 {
+  background: linear-gradient(
+    45deg,
+    #fff 0%,
+    #fbff40 50%,
+    #fbe9a5 75%,
+    #f6cb27 100%
+  );
+}
+
+//common-alert
+.g-2 {
+  background: linear-gradient(#f1d7b7 0%, #cca172 50%, #f1c999 100%);
+
+  &:active {
+    background: linear-gradient(to top, #f1d7b7 0%, #cca172 50%, #f1c999 100%);
+  }
+}
+
+.g-3 {
+  background: linear-gradient(#ffffff 40%, #f4f4f4 100%);
+}
+
+.g-4 {
+  background: linear-gradient(#ffffff 40%, #f2f2f2 100%);
+}
+
+/***合作聯盟 連結紐***/
+.g-5 {
+  background: linear-gradient(to bottom, #ffffff 25%, #cccccc 100%);
+
+  &:active {
+    background: linear-gradient(to bottom, #cccccc 25%, #ffffff 100%);
+  }
+}
+
+/***合作聯盟 金框***/
+.g-7 {
+  background: linear-gradient(
+    135deg,
+    #a1550b 0%,
+    #eed386 25%,
+    #b87b2a 50%,
+    #fff8ad 75%,
+    #d3aa5b 100%
+  );
+}
+
+/***合作聯盟 藍區塊***/
+.g-8 {
+  background: linear-gradient(135deg, #00b5ff 0%, #0c6bff 55%, #7991ff 100%);
+}
+
+/***合作聯盟 紫區塊***/
+.g-9 {
+  background: linear-gradient(135deg, #5500ff 0%, #880cff 55%, #d979ff 100%);
+}
+
+/***合作聯盟 綠區塊***/
+.g-10 {
+  background: linear-gradient(135deg, #59e200 0%, #3cab08 55%, #60b857 100%);
+}
+
+/***合作聯盟 黃區塊***/
+.g-11 {
+  background: linear-gradient(135deg, #ffc600 0%, #d28b00 55%, #ffd665 100%);
+}
+
+// use info
+.g-6 {
+  background: linear-gradient(#21d506, #05b900);
+}
+
+// footer
+.g-12 {
+  background: linear-gradient(#fff 0%, #f2f2f2 100%);
+}
+
+// vip board
+.g-13 {
+  background: linear-gradient(#ffe9f5 0%, #fffff2 100%);
+}
+
+// 銀行卡
+.g-14 {
+  background: linear-gradient(120deg, #f1d7b7 0%, #cca172 50%, #f1c999 100%);
+}
+
+// vip
+.g-15 {
+  background: linear-gradient(#5e9cff, #386df8);
+}
+
+//common-alert
+
+.g-16 {
+  background: linear-gradient(to right, #7c4bff, #887bff);
+}
+
+// letter
+.g-17 {
+  background: linear-gradient(#3178ff, #784dff);
+}
+
+// slot
+.g-18 {
+  background: linear-gradient(#fcfcfc 85%, #d8d8d8);
+}

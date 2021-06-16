@@ -1,0 +1,17 @@
+<div class="quest-wrap">
+  <div class="quest-cover">
+    <img [src]="item.image" />
+  </div>
+  <div class="quest-info panel-style">
+    <ul>
+      <li class="sub-title">{{ "QUEST_CENTER.INFOMATION" | translate }}</li>
+      <li>
+        <div
+          class="detail-info"
+          [innerHTML]="item.information | safeHtml"
+        ></div>
+      </li>
+    </ul>
+    <div class="quest-footer"></div>
+  </div>
+</div>

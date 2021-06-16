@@ -1,0 +1,23 @@
+.record {
+  .r-header {
+    font-size: 14px;
+    .status_label {
+      color: #4d4d4d;
+    }
+    .status {
+      font-size: 13px;
+      color: #000;
+    }
+  }
+  .r-detail {
+    li {
+      font-size: 14px;
+      color: #4d4d4d;
+
+      .num {
+        font-size: 13px;
+        color: #000;
+      }
+    }
+  }
+}

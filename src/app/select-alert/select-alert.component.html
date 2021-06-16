@@ -1,0 +1,13 @@
+<div class="mask" *ngIf="selectAlertService.isOpen">
+  <div class="dialog">
+    <div class="title">
+      {{ selectAlertService.title }}
+      <i (click)="cancel()"></i>
+    </div>
+    <ul>
+      <li *ngFor="let item of selectAlertService.selects.data;let i=index" class="gray_btn" (click)="choose(i)" [ngClass]="{'active': i === selectAlertService.cur.index}">
+        {{ item.name }}
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,144 @@
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 15px 0;
+  margin: 0 0 7px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: #a67c52;
+
+  i {
+    width: 4.27vw;
+    height: 4.27vw;
+    background: url("/tb-mobile/assets/img/refresh.svg") no-repeat center center;
+  }
+}
+
+.list {
+  max-height: calc(3 * (60.27vw + 14px) + 7px);
+  padding-bottom: 3vw;
+  padding-top: 4px;
+  overflow: hidden;
+
+  li {
+    width: 92.53vw;
+    height: 60.27vw;
+    margin: 0 auto 14px;
+  }
+
+  .li-title {
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 17px;
+    height: 37px;
+    border-bottom: 1px solid #4a59ed;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #000000;
+  }
+
+  .bar-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 90.93vw;
+    // height: 17.87vw;
+    margin: 3px auto 0;
+    background: #f8f8f8;
+    padding: 10px 20px 15px;
+  }
+
+  .point {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    p {
+      font-size: 13px;
+      letter-spacing: 0px;
+      color: #666666;
+    }
+  }
+
+  .bar {
+    width: 100%;
+    height: 5px;
+    background: #ccc;
+    border-radius: 5px;
+    margin: 4px 0;
+
+    .cur {
+      height: 5px;
+      background: #cca172;
+      border-radius: 5px;
+    }
+  }
+
+  .not-finish {
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #808080;
+  }
+
+  .finish {
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #e11515;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0 0 16px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #4d4d4d;
+
+    .item-title {
+      margin: 0 19px 0 0;
+    }
+  }
+
+  .coupon-btn-group {
+    display: flex;
+    align-items: center;
+    // justify-content: center;
+    justify-content: space-between;
+    padding: 20px 14px 10px;
+
+    button {
+      width: 41.33vw;
+      height: 8.27vw;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+  }
+
+  &.isOpen {
+    max-height: none;
+  }
+}
+
+.open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0 0;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: #000000;
+
+  i {
+    width: 12px;
+    height: 12px;
+    margin: 0 0 0 9px;
+    transition: transform 500ms ease 0s;
+    background: url("~src/assets/img/unfold.svg") no-repeat center center;
+
+    &.isOpen {
+      transform: rotate(180deg);
+    }
+  }
+}

@@ -1,0 +1,48 @@
+.main {
+  overflow: scroll;
+  width: 100vw;
+  height: calc(100vh - 92px);
+  padding: 10px;
+}
+
+ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+li {
+  width: 44vw;
+  height: 127px;
+  border-radius: 5px;
+  border: solid #dbdbdb 1px;
+  padding: 2px;
+  margin-bottom: 20px;
+
+  img {
+    // max-width: 161px;
+    // max-height: 96px;
+    // width: calc(44vw - 4px);
+    width: 100%;
+    height: 96px;
+    border-radius: 5px 5px 0 0;
+    border: solid #dbdbdb 1px;
+  }
+
+  p {
+    font-size: 18px;
+    color: #848484;
+    text-align: center;
+    line-height: 18px;
+
+
+    i {
+      background: url("~src/assets/img/download.svg") no-repeat center center;
+      width: 15px;
+      height: 15px;
+      display: inline-block;
+      margin-left: 8px;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+<div *ngIf="!activeFile" class="help-center">
+	<div class="h-header">
+		<div class="box">
+			<span>{{ activeTab.name | translate }}</span>
+			<i></i>
+			<select [(ngModel)]="activeTab" (change)="changeTab()">
+				<option *ngFor="let item of tabs" [ngValue]="item" >
+					{{ item.name | translate }}
+				</option>
+			</select>
+		</div>
+	</div>
+	<div class="h-body">
+		<div class="h-nav">
+			<ul>
+				<li *ngFor="let item of activeTab.files" class="panel-style" (click)="changeFile(item)">
+					{{ item.name | translate }}
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="activeFile" class="help-content">
+	<markdown [url]="url"></markdown>
+</div>

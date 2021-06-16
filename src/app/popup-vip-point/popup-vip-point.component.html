@@ -1,0 +1,31 @@
+<div class="mask">
+  <div class="dialog">
+    <div class="title">
+      <p>{{ "VIP.chk_amount" | translate }}</p>
+      <i (click)="close()"></i>
+    </div>
+    <div class="total">
+      {{ "VIP.current_point" | translate }}
+      <p>
+        8,980,000
+      </p>
+    </div>
+    <ul>
+      <li *ngFor="let item of data;let i=index">
+        <div class="name">{{ item.name }}</div>
+        <div class="point">
+          {{ item.point }}
+          <div class="notice" *ngIf="item.display">
+            <p>
+              {{ "VIP.scale-notice" | translate:{scale: item.scale} }}
+              <i class="arrow"></i>
+            </p>
+          </div>
+        </div>
+        <button class="orange_btn" (click)="openScale(i)">
+          {{ "VIP.scale-watch" | translate }}
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

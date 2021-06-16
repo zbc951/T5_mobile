@@ -1,0 +1,232 @@
+<div class="scroll-wrap" appList (gotBottom)="onBtm($event)">
+  <div class="search-contain">
+    <!-- <form [formGroup]="form" (ngSubmit)="searchReview()"> -->
+    <form [formGroup]="form" appThrottle (action)="searchReview()">
+      <ul>
+        <li>
+          <p>{{ "REVIEW_RECORD.SEARCH.COL-TYPE" | translate }}</p>
+          <select class="type-selector" formControlName="type">
+            <!-- <option value="all">
+              {{ "REVIEW_STATUS.ALL" | translate }}
+            </option> -->
+            <option *ngFor="let item of typeOptions" [value]="item.value">
+              {{ item.label }}
+            </option>
+          </select>
+        </li>
+        <li>
+          <p>{{ "REVIEW_RECORD.SEARCH.COL-DATE" | translate }}</p>
+          <div class="date-selector">
+            <input type="date" formControlName="startTime" />
+            <span>~</span>
+            <input type="date" formControlName="endTime" />
+            <!-- <div><i></i></div> -->
+          </div>
+        </li>
+        <li>
+          <app-date-selector (timeEvt)="setTime($event)"></app-date-selector>
+        </li>
+        <li>
+          <button class="btn-confirm orange_btn">
+            {{ "REVIEW_RECORD.SEARCH.CONFIRM" | translate }}
+          </button>
+        </li>
+      </ul>
+    </form>
+  </div>
+  <div class="review-body" [ngSwitch]="queryType">
+    <div class="empty-data" *ngIf="pageConfig.totalItems === 0">
+      {{ "NO_DATA" | translate }}
+    </div>
+    <div class="record panel-style" *ngFor="let item of list">
+      <!-- group-deposit -->
+      <ul *ngSwitchCase="logtypGroups['group-deposit']">
+        <li class="r-header">
+          <span>{{ RECORD_REVIEW_OPTIONS[item.type] }}</span>
+          <span class="time">{{ item.created_at }}</span>
+        </li>
+        <li class="r-body">
+          <ul class="r-detail">
+            <li>
+              <span>{{ "REVIEW_RECORD.DEPOSIT.TABLE.TID" | translate }}</span>
+              <span>{{ item.tid }}</span>
+            </li>
+            <li>
+              <span>{{ "REVIEW_RECORD.DEPOSIT.TABLE.MONEY" | translate }}</span>
+              <span>{{ item.money | floatDisplay }}</span>
+            </li>
+            <li>
+              <span>{{
+                "REVIEW_RECORD.DEPOSIT.TABLE.STATUS" | translate
+              }}</span>
+              <span>{{ REVIEW_STATUS[item.status] }}</span>
+            </li>
+            <li>
+              <span>{{
+                "REVIEW_RECORD.DEPOSIT.TABLE.REASON" | translate
+              }}</span>
+              <span>{{ item.reason || "-" }}</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- group-withdraw -->
+      <ul *ngSwitchCase="logtypGroups['group-withdraw']">
+        <li class="r-header">
+          <span>{{ item.tid }}</span>
+        </li>
+        <li class="r-body">
+          <ul class="r-detail">
+            <li>
+              <span>{{ "MEMBER_RECORD.TIME" | translate }}</span>
+              <span>{{ item.created_at }}</span>
+            </li>
+            <li>
+              <span>{{ "REVIEW_RECORD.WITHDRAW.ACCOUNT" | translate }}</span>
+              <span>{{ item.bank }}</span>
+            </li>
+            <li>
+              <span>{{ "REVIEW_RECORD.DEPOSIT.TABLE.MONEY" | translate }}</span>
+              <span>{{ item.money | floatDisplay }}</span>
+            </li>
+            <li>
+              <span>{{
+                "REVIEW_RECORD.DEPOSIT.TABLE.STATUS" | translate
+              }}</span>
+              <span>{{ REVIEW_STATUS[item.status] }}</span>
+            </li>
+            <li>
+              <span>{{
+                "REVIEW_RECORD.DEPOSIT.TABLE.REASON" | translate
+              }}</span>
+              <span>{{ item.reason || "-" }}</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- group-transfer -->
+      <ul *ngSwitchCase="logtypGroups['group-transfer']">
+        <li class="r-header">
+          <span>{{ REVIEW_TRANSFER_TYPE[item.type] }}</span>
+          <span class="time">{{ item.created_at }}</span>
+        </li>
+        <li class="r-body">
+          <ul class="r-detail">
+            <li>
+              <span>{{
+                "REVIEW_RECORD.TRANSFER.TABLE.CONTENT" | translate
+              }}</span>
+              <span [ngSwitch]="item.type">
+                <ng-container *ngSwitchCase="withdrawType.transferGame">
+                  {{ "PFTRANSITION.CENTER" | translate }}->{{
+                    item.platform_name
+                  }}
+                </ng-container>
+                <ng-container *ngSwitchCase="withdrawType.transferWallet">
+                  {{ item.platform_name }}->{{
+                    "PFTRANSITION.CENTER" | translate
+                  }}
+                </ng-container>
+                <ng-container *ngSwitchCase="withdrawType.mounted">
+                  {{
+                    item.platform_name
+                      ? item.platform_name
+                      : ("PFTRANSITION.CENTER" | translate)
+                  }}->{{ item.product_name }}
+                </ng-container>
+                <ng-container *ngSwitchCase="withdrawType.unmounted">
+                  {{ item.product_name }}->{{
+                    item.platform_name
+                      ? item.platform_name
+                      : ("PFTRANSITION.CENTER" | translate)
+                  }}
+                </ng-container>
+              </span>
+            </li>
+            <li>
+              <span>{{ "REVIEW_RECORD.DEPOSIT.TABLE.MONEY" | translate }}</span>
+              <span>{{ item.money }}</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- group-water -->
+      <ul *ngSwitchCase="logtypGroups['group-water']">
+        <li class="r-header">
+          <span>{{ REVIEW_WATER_TYPE[item.type] }}</span>
+          <span class="time">{{ item.created_at }}</span>
+        </li>
+        <li class="r-body">
+          <ul class="r-detail">
+            <li>
+              <span>{{ "REVIEW_RECORD.DEPOSIT.TABLE.MONEY" | translate }}</span>
+              <span>{{ item.money | floatDisplay }}</span>
+            </li>
+            <li>
+              <span>{{
+                "REVIEW_RECORD.DEPOSIT.TABLE.REASON" | translate
+              }}</span>
+              <span>{{ item.remark || "-" }}</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- group-activity-wallet -->
+      <ul *ngSwitchCase="logtypGroups['group-activity-wallet']">
+        <li class="r-header act-header">
+          <span>{{ item.productName }}</span>
+        </li>
+        <li class="r-body">
+          <ul class="r-detail">
+            <li>
+              <span>{{ "MEMBER_RECORD.TIME" | translate }}</span>
+              <span>{{ item.createdAt }}</span>
+            </li>
+            <li>
+              <span>{{ "REVIEW_RECORD.WALLET.CHANGE" | translate }}</span>
+              <span>{{ item.money | floatDisplay }}</span>
+            </li>
+            <li>
+              <span>{{
+                "REVIEW_RECORD.DEPOSIT.TABLE.STATUS" | translate
+              }}</span>
+              <span>{{ REVIEW_ACTIVITY_TYPE[item.type] }}</span>
+            </li>
+            <li>
+              <span>{{
+                "REVIEW_RECORD.DEPOSIT.TABLE.REASON" | translate
+              }}</span>
+              <span>{{ item.remark || "-" }}</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- group-others -->
+      <ul *ngSwitchCase="logtypGroups['group-others']">
+        <li class="r-header">
+          <span>{{ RECORD_REVIEW_OPTIONS[item.type] }}</span>
+          <span class="time">{{ item.createdAt }}</span>
+        </li>
+        <li class="r-body">
+          <ul class="r-detail">
+            <li>
+              <span>{{ "REVIEW_RECORD.DEPOSIT.TABLE.MONEY" | translate }}</span>
+              <span>{{ item.money | floatDisplay }}</span>
+            </li>
+            <li>
+              <span>{{
+                "REVIEW_RECORD.DEPOSIT.TABLE.REASON" | translate
+              }}</span>
+              <span>{{ item.remark || "-" }}</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

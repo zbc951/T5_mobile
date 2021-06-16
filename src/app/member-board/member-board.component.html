@@ -1,0 +1,38 @@
+<div class="board-wrap" [class.login]="isLogin">
+  <div class="info login-info-public" *ngIf="!isLogin" (click)="login()">
+    <div class="login-btn">
+      <img src="assets/img/member-board/board.png" />
+    </div>
+    <span class="login-btn-info">
+      {{ "LOGIN.TITLE" | translate }} /
+      {{ "REGISTER.TITLE" | translate }}
+    </span>
+  </div>
+  <div class="info login-info-login" *ngIf="isLogin">
+    <ul>
+      <li>
+        <span class="member-name">{{ user.account }}</span>
+        <div class="vip-lv">{{ lv }}</div>
+      </li>
+      <li class="member-amount">${{ user.money | floatDisplay }}</li>
+    </ul>
+  </div>
+  <div class="operate-btn" [class.no-vip]="!canUpgrade">
+    <div class="btn-dot" routerLink="/{{ AppRoutes.DEPOSIT }}">
+      {{ "NEWBIE.DEPOSIT.TITLE" | translate | slice: 0:1 }}
+    </div>
+    <div class="btn-dot" routerLink="/{{ AppRoutes.TRANSFER }}">
+      {{ "NEWBIE.TRANSFER.TITLE" | translate | slice: 0:1 }}
+    </div>
+    <div class="btn-dot" routerLink="/{{ AppRoutes.WITHDRAWAL }}">
+      {{ "NEWBIE.WITHDRAW.TITLE" | translate | slice: 0:1 }}
+    </div>
+    <div
+      *ngIf="canUpgrade"
+      class="btn-dot btn-vip"
+      routerLink="/{{ AppRoutes.VIP }}"
+    >
+      {{ "MEMBER_NAV.VIP" | translate | slice: 0:3 }}
+    </div>
+  </div>
+</div>

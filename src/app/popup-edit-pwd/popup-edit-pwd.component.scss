@@ -1,0 +1,30 @@
+.dialog {
+  width: 87.2vw;
+
+  .title {
+    height: 45px;
+  }
+}
+
+input {
+  width: 77.6vw;
+  height: 9.87vw;
+  margin-top: 19px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  button {
+    width: 77.6vw;
+    height: 11.2vw;
+    margin: 10.13vw 0 8vw;
+  }
+
+  .err {
+    margin: 5px 18px;
+    align-self: self-start;
+  }
+}

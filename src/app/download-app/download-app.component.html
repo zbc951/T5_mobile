@@ -1,0 +1,8 @@
+<div class="main">
+  <ul>
+    <li *ngFor="let item of list" (click)="click(item)">
+      <img [src]="item.indexImgUrl" alt="" />
+      <p>{{ item.name }} <i></i></p>
+    </li>
+  </ul>
+</div>

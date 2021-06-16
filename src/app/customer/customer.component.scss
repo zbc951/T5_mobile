@@ -1,0 +1,58 @@
+.welcome-main {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+}
+.welcome-prompt {
+    font-size: 14px;
+    color: #595757;
+    line-height: 1.5;
+    margin-top: 4px;
+}
+.online-main {
+    margin: 1rem;
+    padding: .7rem 1rem;
+    border-radius: 1rem;
+    min-height: 6rem;
+    display: flex;
+    align-items: center;
+    border: solid 1.5px #957222;
+    color: #a07d44;
+    box-shadow: 3px 3px 3px 0px #c5c5c5;
+    background-color: white;
+    &.line {
+        border-color: #00b900;
+        color: #00b900;
+    }
+    &.zalo {
+        border-color: #0180c7;
+        color: #0180c7;
+    }
+    &.wechat {
+        border-color: #59c03c;
+        color: #59c03c;
+    }
+}
+.online-icon {
+    width: 35px;
+    height: 35px;
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+.online-text {
+    margin-left: 1rem;
+    line-height: 1.5rem;
+    width: calc(100% - 4rem);
+    .online-title {
+        font-size: 1.2rem;
+    }
+    .online-entitle {
+        font-size: .9rem;
+        opacity: .4;
+    }
+    .online-prompt {
+        font-size: .9rem;
+    }
+}

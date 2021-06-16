@@ -1,0 +1,118 @@
+<div class="main">
+  <div class="class">
+    <a
+      [class.active]="tab == tabs.msg"
+      (click)="selectTab(tabs.msg)"
+      ng-href="#"
+      >{{ "LETTER.msg" | translate }}</a
+    >
+    <a
+      [class.active]="tab == tabs.announce"
+      (click)="selectTab(tabs.announce)"
+      ng-href="#"
+      >{{ "LETTER.announcement" | translate }}</a
+    >
+  </div>
+  <div class="sub_class flex">
+    <ng-container *ngIf="tab == tabs.msg; else toAllTab">
+      <span
+        [class.active]="msgType == Role.SYSTEM"
+        (click)="selectMsgType(Role.SYSTEM)"
+        >{{ "LETTER.system" | translate }}</span
+      >
+      <span
+        [class.active]="msgType == Role.AGENT"
+        (click)="selectMsgType(Role.AGENT)"
+        >{{ "LETTER.member" | translate }}</span
+      >
+    </ng-container>
+    <ng-template #toAllTab>
+      <ul class="announce-tabs flex">
+        <li
+          [class.active]="announcType == MarqueeType.Hot"
+          (click)="selectAnnounceType(MarqueeType.Hot)"
+        >
+          {{ "BULLETIN.HOT" | translate }}
+        </li>
+        <li
+          [class.active]="announcType == MarqueeType.Normal"
+          (click)="selectAnnounceType(MarqueeType.Normal)"
+        >
+          {{ "BULLETIN.NORMAL" | translate }}
+        </li>
+        <li
+          [class.active]="announcType == MarqueeType.deposit"
+          (click)="selectAnnounceType(MarqueeType.deposit)"
+        >
+          {{ "BULLETIN.DEPOSIT" | translate }}
+        </li>
+      </ul>
+    </ng-template>
+  </div>
+  <div class="btn_list flex" *ngIf="isEditing">
+    <span class="all"
+      ><p class="radio">
+        <input type="checkbox" [checked]="checkAll" (click)="toggleAll()" />
+      </p>
+      {{ "LETTER.all" | translate }}</span
+    >
+    <span class="modify">
+      <!-- <a ng-href="#" (click)="readMessage()">{{ "LETTER.read" | translate }}</a> -->
+      <a ng-href="#" appThrottle (action)="readMessage()">{{
+        "LETTER.read" | translate
+      }}</a>
+      <!-- <a ng-href="#" (click)="removeMessage()"> -->
+      <a ng-href="#" appThrottle (action)="removeMessage()">
+        {{ "LETTER.DEL" | translate }}</a
+      >
+    </span>
+  </div>
+  <div class="list">
+    <form [formGroup]="form">
+      <ul formArrayName="check">
+        <!-- <ng-container *ngIf="tab == tabs.msg; else toAll"> -->
+        <ng-container *ngIf="tab == tabs.msg">
+          <li
+            *ngFor="let item of messageList?.content; let idx = index"
+            [class.read]="item.isRead"
+            (click)="goDetail(item, $event)"
+          >
+            <p class="radio" *ngIf="isEditing">
+              <input
+                type="checkbox"
+                [formControlName]="idx"
+                (change)="doCheckAll()"
+              />
+            </p>
+            <div>
+              <p>
+                <span class="title">{{ item.title }}</span>
+                <span class="date">{{
+                  item.createdAt | date: "yyyy/MM/dd"
+                }}</span>
+              </p>
+              <p class="msg">{{ item.content }}</p>
+            </div>
+          </li>
+        </ng-container>
+        <li
+          *ngFor="let item of announceList?.content"
+          (click)="goDetail(item, $event)"
+        >
+          <div>
+            <p>
+              <span class="title">{{ item.content }}</span>
+              <span class="date"
+                >{{ item.start_time | date: "yyyy/MM/dd" }}
+                <ng-container *ngIf="item.start_time || item.end_time">
+                  ~
+                </ng-container>
+                {{ item.end_time | date: "yyyy/MM/dd" }}</span
+              >
+            </p>
+          </div>
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>

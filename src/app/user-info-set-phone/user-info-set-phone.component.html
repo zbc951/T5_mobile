@@ -1,0 +1,41 @@
+<div class="mask">
+  <div class="dialog">
+    <div class="title">
+      <p>{{ "TIPS" | translate }}</p>
+      <i (click)="close()"></i>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="updateInfo()">
+      <div class="cnt">
+        <p class="old-phone">
+          {{ "MEMBER_INFO.old_phone" | translate }} : {{ oldPhone }}
+        </p>
+        <ul>
+          <li class="input-wrap relative">
+            <input
+              placeholder="{{ 'MEMBER_INFO.new-phone' | translate }}"
+              formControlName="phone"
+            />
+            <p class="err" *ngIf="invalidErrors.phone">
+              {{ invalidErrors.phone }}
+            </p>
+            <button type="button" (click)="getCode()" class="code-btn">
+              {{ "MEMBER_INFO.SEND_CODE" | translate }}
+            </button>
+          </li>
+          <li>
+            <input
+              placeholder="{{ 'MEMBER_INFO.CODE' | translate }}"
+              formControlName="smsCode"
+            />
+          </li>
+        </ul>
+      </div>
+      <div class="btn">
+        <button [disabled]="!isValidtoSend()">
+          {{ "MEMBER_INFO.CONFIRM" | translate }}
+        </button>
+      </div>
+      <p class="tips">{{ "MEMBER_INFO.set-phone-tips" | translate }}</p>
+    </form>
+  </div>
+</div>

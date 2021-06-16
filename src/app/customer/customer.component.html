@@ -1,0 +1,27 @@
+<div class="welcome-main">
+  <div class="welcome-info">
+    <div class="welcome-user">{{ "CUSTOMER.HEADLINE" | translate }}</div>
+    <div class="welcome-prompt">{{ "CUSTOMER.INFO" | translate }}</div>
+  </div>
+</div>
+<a class="online-main" *ngIf="csServices.live_chat" [href]="csServices.live_chat" target="_blank">
+  <div class="online-icon">
+    <img src="assets/img/new/customer-service.svg">
+  </div>
+  <div class="online-text">
+    <div class="online-title">{{ "CUSTOMER.ONLINE.TITLE" | translate }}</div>
+    <div class="online-entitle">{{ "CUSTOMER.ONLINE.ENTITLE" | translate }}</div>
+    <div class="online-prompt">{{ "CUSTOMER.ONLINE.PROMPT" | translate }}</div>
+  </div>
+</a>
+<div *ngFor="let item of serviceType">
+  <a class="online-main" *ngIf="item.data" [href]="item.data?.url" target="_blank" [ngClass]="item.type">
+    <div class="online-icon">
+      <img [src]="item.imgUrl">
+    </div>
+    <div class="online-text">
+      <div class="online-title">{{ item.title | translate }}</div>
+      <div class="online-prompt">{{ item.data?.id | translate }}</div>
+    </div>
+  </a>
+</div>

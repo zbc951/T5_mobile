@@ -1,0 +1,32 @@
+.dialog {
+  width: 92vw;
+
+  // .title {
+  //   height: 41px;
+  //   font-size: 16px;
+  //   letter-spacing: 2px;
+  // }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding: 3.2vw;
+    margin: 0 -2.4vw 0 0;
+
+    li {
+      flex-shrink: 0;
+      width: 26.93vw;
+      // height: 9.87vw;
+      min-height: 9.87vw;
+      margin: 0 2.4vw 2.4vw 0;
+      font-size: 14px;
+      color: #808080;
+
+      &.active {
+        background: linear-gradient(#cda273 10%, #eec696 100%);
+        color: #fff;
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+<div class="panel">
+  <div class="header">
+    <p class="title">{{ "MEMBER_WITHDRAW.record_title" | translate }}</p>
+    <p class="no">
+      {{ "MEMBER_WITHDRAW.record_th.no" | translate }} {{ serial_num }}
+    </p>
+    <button class="close-btn" (click)="close()"></button>
+  </div>
+  <div class="cnt">
+    <div class="table">
+      <ul
+        *ngFor="
+          let item of records
+            | paginate
+              : {
+                  itemsPerPage: itemsPerPage,
+                  currentPage: currentPage,
+                  totalItems: totalItems
+                }
+        "
+      >
+        <li class="header">
+          <p>{{ item.mid }}</p>
+        </li>
+        <li>
+          <p>{{ "MEMBER_TRANSFER.PLATFORM" | translate }}</p>
+          <p>{{ item.platform }}</p>
+        </li>
+
+        <li>
+          <p>{{ "MEMBER_REVIEW.MONEY" | translate }}</p>
+          <p class="wMoney">{{ item.money }}</p>
+        </li>
+        <li>
+          <p>{{ "MEMBER_RECORD.DATE" | translate }}</p>
+          <p>{{ item.createdAt }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- <div class="drawback-sum">
+    <p>
+      <span>{{ "MEMBER_WITHDRAW.record_sum" | translate }}</span>
+      <em>{{ deductionBetAmount }}</em>
+    </p>
+    <p>
+      <span>{{ "MEMBER_WITHDRAW.makeUpBetAmount" | translate }}</span>
+      <em>{{ makeUpBetAmount }}</em>
+    </p>
+  </div> -->
+  <div class="page-block">
+    <pagination-controls
+      (pageChange)="pageChanged($event)"
+      class="pagination"
+      autoHide="true"
+      previousLabel=""
+      nextLabel=""
+      id="bet-record"
+    >
+    </pagination-controls>
+    <p>
+      {{
+        "PAGEINFO"
+          | translate: { totalItems: totalItems, itemsPerPage: itemsPerPage }
+      }}
+    </p>
+  </div>
+</div>

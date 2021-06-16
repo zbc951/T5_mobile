@@ -1,0 +1,73 @@
+.dialog {
+  width: 91.94vw;
+  // height: 78.07vh;
+  padding: 0 0 6.13vw;
+}
+
+form {
+  padding: 7.2vw 4vw 0 6.13vw;
+
+  input,
+  select {
+    width: 59.2vw;
+    height: 9.86vw;
+  }
+
+  .form-row {
+    .item {
+      margin: 0 6vw 0 0;
+    }
+  }
+
+  .item,
+  .item_text {
+    position: relative;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #333333;
+
+    .time {
+      position: absolute;
+      bottom: -14px;
+      left: 0;
+      width: 45vw;
+      font-size: 13px;
+      letter-spacing: 0px;
+      color: #999999;
+    }
+  }
+
+  .item_text {
+    font-size: 18px;
+  }
+}
+
+.transferConfirm {
+  justify-content: flex-end;
+
+  button {
+    width: 26.13vw;
+    height: 11.2vw;
+  }
+}
+
+.goGame {
+  width: 77.33vw;
+  height: 11.46vw;
+  margin: 4.8vw auto 0;
+}
+
+@media only screen and (max-width: 320px) {
+  /* For mobile phones: */
+  form .form-row .item {
+    margin: 0 12px 0 0;
+  }
+}
+
+.locked {
+  font-size: 14px;
+  margin: 10px 0 0 0;
+  color: #f15a24;
+  // text-align: center;
+  padding: 10px 0;
+}

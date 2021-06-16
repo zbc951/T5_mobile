@@ -1,0 +1,49 @@
+.dialog {
+  width: 87.2vw;
+  height: 68vh;
+
+  .title {
+    position: relative;
+    height: 45px;
+    width: 100%;
+    text-align: center;
+    line-height: 45px;
+    font-size: 18px;
+    color: #fff;
+  }
+
+}
+
+button {
+  width: 77.6vw;
+  height: 11.2vw;
+  margin: 10.13vw 0 8vw;
+}
+
+.orange_btn {
+  margin: 15px auto;
+}
+
+.overflow {
+  overflow: scroll;
+  height: calc(68vh - 120px);
+  margin-top: 5px;
+  padding: 5vw;
+
+  h2 {
+    font-size: 14px;
+    color: #000;
+    margin-top: 21px;
+    margin-bottom: 21px;
+
+    &:first-child {
+      margin-top: 11px;
+    }
+  }
+
+  p {
+    font-size: 12px;
+    color: #3e3a39;
+    line-height: 20px;
+  }
+}

@@ -1,0 +1,595 @@
+.help-canter {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background-color: #f2f3f3;
+
+  &>div {
+    width: 100vw;
+  }
+
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #595757;
+}
+
+.h-header {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #e6e6e6;
+
+  .box {
+    width: 92.27vw;
+    height: 41px;
+    line-height: 41px;
+    position: relative;
+    // text-align-last: center;
+    // text-align: -webkit-center; // for Safari
+    display: flex;
+    justify-content: center;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 2px 3px 0px #dedede;
+    border: solid 1px #957222;
+    color: #a07d44;
+
+    &>i {
+      width: 9px;
+      height: 16px;
+      background: url("~src/assets/img/new/arrow_b.png") no-repeat;
+      background-size: 100%;
+      position: absolute;
+      top: 12px;
+      right: 4vw;
+      transform: rotate(270deg);
+    }
+  }
+
+  select {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+}
+
+.h-body {
+  height: calc(100vh - 164px);
+  overflow-y: scroll;
+}
+
+.h-nav {
+  padding: 15px 4vw 15px 4vw;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+
+  &>ul {
+    width: 92.27vw;
+  }
+
+  & li {
+    height: 51px;
+    line-height: 51px;
+    text-align: center;
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.content-detail {
+  font-size: 14px;
+  font-weight: bold;
+  color: #595757;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 14px 0 14px 0;
+
+  &>div {
+    width: 92.27vw;
+    flex-shrink: 0;
+  }
+
+  &>div:first-child {
+    min-height: 51px;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    &>span {
+      width: 73vw;
+      flex-shrink: 0;
+    }
+
+    &>i {
+      background-position: center;
+      background-size: contain;
+    }
+
+    &>i:first-child {
+      width: 24px;
+      height: 24px;
+      margin: 0 4vw 0 4vw;
+    }
+
+    .arrow {
+      width: 9px;
+      height: 16px;
+      background: url("~src/assets/img/new/arrow_b.png") no-repeat;
+      background-size: 100%;
+      transition: 0.2s;
+      transform: rotate(180deg);
+      position: absolute;
+      right: 4vw;
+
+      &.active {
+        transform: rotate(270deg);
+      }
+    }
+  }
+
+  .icon-lamp {
+    background: url("~src/assets/img/new/lamp.png") no-repeat;
+    background-size: 100%;
+  }
+
+  .icon-problem {
+    background: url("~src/assets/img/new/problemIC.png") no-repeat;
+    background-size: 100%;
+  }
+
+  .icon-about {
+    background: url("~src/assets/img/help/aboutus.svg") no-repeat;
+  }
+}
+
+.detail-body {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  background: #ffffff;
+  box-shadow: 0px 2px 6px 0px rgb(0 0 0 / 30%);
+
+  &>*:not(img) {
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  span {
+    line-height: 25px;
+  }
+
+  img {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #f2f2f2;
+    margin: 10px 0 10px 0;
+  }
+}
+
+ul.teach2 {
+  margin-top: 20px;
+
+  li {
+    margin: 5px 0 5px 0;
+
+    .item {
+      align-items: center;
+
+      p {
+        display: flex;
+        margin-bottom: 0;
+
+        i {
+          margin-right: 10px;
+
+          &.online {
+            width: 26px;
+            height: 26px;
+            // background: url("~src/assets/img/help/online.svg") no-repeat;
+          }
+
+          &.wechat {
+            width: 26px;
+            height: 23px;
+            background: url("~src/assets/img/third/wechat.svg") no-repeat;
+          }
+
+          &.alipay {
+            width: 25px;
+            height: 25px;
+            background: url("~src/assets/img/third/alipay.svg") no-repeat;
+          }
+
+          &.unionpay {
+            width: 30px;
+            height: 19px;
+            background: url("~src/assets/img/third/unionpay.svg") no-repeat;
+          }
+
+          &.number-deposit {
+            width: 26px;
+            height: 26px;
+            // background: url("~src/assets/img/help/number-deposit.svg") no-repeat;
+          }
+        }
+      }
+
+      &>i {
+        width: 10px;
+        height: 10px;
+        background: url("~src/assets/img/arrow_b.svg") no-repeat;
+        transition: 0.2s;
+        transform: rotate(180deg);
+        margin-left: 10px;
+      }
+
+      &.active {
+        &>i {
+          background: url("~src/assets/img/arrow_b.svg") no-repeat;
+          transform: rotate(270deg);
+        }
+      }
+    }
+
+    .online-cnt {
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+    }
+
+    .online-cnt,
+    .unionpay-cnt {
+      .online01 {
+        max-width: 862px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      &>.flex {
+        justify-content: space-between;
+
+        &>div {
+          width: 350px;
+          text-align: center;
+        }
+      }
+
+      &>p {
+        &.orange {
+          margin: 20px 0 !important;
+        }
+      }
+    }
+
+    .wechat-cnt,
+    .alipay-cnt {
+      justify-content: space-between;
+
+      h2 {
+        text-align: center;
+      }
+
+      &>div {
+        width: 350px;
+
+        &:first-of-type {
+          p {
+            margin-bottom: 18px;
+          }
+
+          img {
+            margin-bottom: 30px;
+          }
+        }
+      }
+
+      .phone {
+        background: #fffcf5;
+        border-radius: 10px;
+        width: 350px;
+        height: 569px;
+        margin-bottom: 20px;
+        text-align: center;
+        padding: 15px;
+
+        &>div {
+          align-items: center;
+
+          i {
+            width: 40px;
+            height: 20px;
+            background: url("~src/assets/img/arrow_b.svg") no-repeat;
+            background-position: center center;
+            background-size: 11px 19px;
+            cursor: pointer;
+
+            &.left {
+              transform: rotate(180deg);
+            }
+          }
+
+          .image {
+            position: relative;
+            width: 260px;
+            height: 447px;
+          }
+
+          img {
+            border: none;
+          }
+        }
+
+        ul {
+          justify-content: center;
+          margin-top: 22px;
+
+          li {
+            width: 8px;
+            height: 8px;
+            margin: 0 3px;
+            border-radius: 4px;
+            background: #b3b3b3;
+          }
+        }
+      }
+    }
+  }
+}
+
+.teach3,
+.teach4 {
+  img {
+    border-radius: 5px;
+    border: 1px solid #f2f2f2;
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+}
+
+.problem2 {
+  li {
+    .item {
+      p {
+        display: flex;
+        margin-bottom: 0;
+
+        i {
+          width: 19px;
+          height: 19px;
+          background: url(/tb/assets/img/help/fix_o.svg) no-repeat;
+          margin-right: 10px;
+        }
+      }
+
+      &>i {
+        width: 15px;
+        height: 15px;
+        background: url(/tb/assets/img/help/add.svg) no-repeat;
+      }
+    }
+
+    .canot-open {
+      p {
+        margin-bottom: 10px;
+
+        span {
+          color: #ff7415;
+          font-size: 15px;
+          font-weight: bold;
+          margin-right: 10px;
+        }
+      }
+
+      button {
+        color: #333333;
+        font-size: 13px;
+        font-weight: bold;
+        width: 115px;
+        height: 30px;
+        border: 1px solid #b3b3b3;
+        border-radius: 3px;
+        margin-right: 8px;
+      }
+
+      &>div {
+        border-bottom: 1px solid #f2f2f2;
+        padding-bottom: 15px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+.problem3 {
+  img {
+    margin: 10px 0 20px 0;
+  }
+
+  &>.flex {
+    margin-left: 55px;
+
+    img {
+      margin-left: 0px;
+    }
+  }
+}
+
+.problem4 {
+  h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .tf-hr {
+    align-items: center;
+    padding: 18px 23px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+
+    img {
+      border: none;
+      width: 50px;
+      height: 50px;
+      margin: 0 20px 0 0;
+    }
+
+    p {
+      margin-bottom: 0;
+
+      &.title {
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      &.txt {
+        font-size: 15px;
+      }
+    }
+  }
+
+  .comm {
+    flex-wrap: wrap;
+
+    &>div {
+      padding: 20px 10px;
+      max-width: calc((92.26vw - 24px) / 2);
+    }
+
+    img {
+      width: 100%;
+      margin: auto;
+      display: block;
+    }
+  }
+}
+
+.problem5 {
+  li {
+    .item {
+      align-items: center;
+      justify-content: space-between;
+
+      &>.flex {
+        align-items: center;
+      }
+
+      p {
+        margin-bottom: 0px;
+      }
+
+      img {
+        margin-right: 10px;
+
+        &.ag {
+          width: 45px;
+          height: auto;
+        }
+      }
+
+      .icon {
+        background: url(/tb/assets/img/help/icon-app.png) no-repeat;
+        background-size: 100%;
+        width: 45px;
+        height: 27px;
+        $apps: ebet, ag, og, dg;
+
+        @each $i in $apps {
+          &-#{$i} {
+            background-position-y: (index($apps, #{$i}) - 1) / (length($apps) - 1) * 100%;
+          }
+        }
+      }
+
+      &>i {
+        width: 15px;
+        height: 15px;
+        background: url(/tb/assets/img/help/add.svg) no-repeat;
+      }
+
+      &.active {
+        &>i {
+          width: 15px;
+          height: 15px;
+          background: url(/tb/assets/img/help/less.svg) no-repeat;
+        }
+      }
+    }
+
+    .item-cnt {
+      justify-content: space-between;
+
+      &>div {
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        padding: 24px 20px;
+        width: calc((100% - 20px) / 3);
+
+        &.ios,
+        &.android {
+          p {
+            text-align: center;
+          }
+
+          img {
+            width: 150px;
+            height: 150px;
+            display: block;
+            margin: 20px auto 25px;
+          }
+        }
+      }
+
+      h3 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      p {
+        margin-bottom: 12px;
+        color: #333333;
+        line-height: 20px;
+      }
+
+      button {
+        width: 100%;
+        height: 30px;
+        border-radius: 15px;
+        border: 1px solid #55aaff;
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: bold;
+        margin-top: 15px;
+        // @extend .g-6;
+      }
+    }
+  }
+}
+
+.about {
+  h2 {
+    font-size: large;
+    font-weight: bold;
+    line-height: 25px;
+
+    &:not(:first-child) {
+      margin-top: 20px;
+    }
+
+    margin-bottom: 10px;
+  }
+
+  p {
+    line-height: 25px;
+  }
+}

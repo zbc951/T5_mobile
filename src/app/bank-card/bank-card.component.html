@@ -1,0 +1,89 @@
+<div class="card_list">
+  <div class="flex">
+    <p class="num-info">
+      {{ "BIND_BANK_CARD.REGISTERED.NUMBER" | translate }}
+      {{ banks.length }}
+      <span
+        >/
+        {{
+          banksLimit > 0 ? banksLimit : ("MEMBER_QUEST.NO_LIMIT" | translate)
+        }}</span
+      >
+    </p>
+    <ul>
+      <li class="card-empty" *ngIf="banks.length === 0">
+        <div class="to-add-card"></div>
+        <div class="status">
+          {{ "BIND_BANK_CARD.ADD.NOTICE" | translate }}
+        </div>
+      </li>
+      <li *ngFor="let card of banks">
+        <p class="name">{{ card.bankName }}</p>
+        <p>{{ card.branchName }}</p>
+        <div class="num">
+          <span>{{ card.account }}</span>
+        </div>
+        <div class="status" *ngIf="card.status">
+          {{ "MEMBER_BANK.STATUS_REVIEW" | translate }}
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- 新增銀行卡 -->
+<div class="panel-style">
+  <!-- <form [formGroup]="addBankForm" (ngSubmit)="addBank(addBankForm)"> -->
+  <form [formGroup]="addBankForm">
+    <p>{{ "BIND_BANK_CARD.ADD.FORM.BANK_NAME" | translate }}</p>
+    <input
+      type="text"
+      required
+      [formControl]="optionCtrl"
+      [matAutocomplete]="auto"
+    />
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option
+        *ngFor="let option of bankOptions"
+        (onSelectionChange)="getCode(option)"
+        [value]="option.code + ' ' + option.name"
+      >
+        {{ option.code }} {{ option.name }}
+      </mat-option>
+    </mat-autocomplete>
+    <span>{{ "BIND_BANK_CARD.ADD.FORM.BANK_NAME_notice" | translate }}</span>
+    <p class="err" *ngIf="bankVlidErrors.bankName">
+      <!-- {{ "REQUIRED" | translate }} -->
+      {{ bankVlidErrors.bankName }}
+    </p>
+    <p>{{ "BIND_BANK_CARD.ADD.FORM.BRANCH_NAME" | translate }}</p>
+    <input type="text" required formControlName="branchName" />
+    <p class="err" *ngIf="bankVlidErrors.branchName">
+      {{ bankVlidErrors.branchName }}
+    </p>
+    <p>{{ "BIND_BANK_CARD.ADD.FORM.USER_NAME" | translate }}</p>
+    <input type="text" formControlName="name" readonly />
+
+    <p>{{ "BIND_BANK_CARD.ADD.FORM.BANK_ACCOUNT" | translate }}</p>
+    <input type="text" required formControlName="account" />
+    <span>{{ "BIND_BANK_CARD.ADD.FORM.NOTICE" | translate }}</span>
+    <p class="err" *ngIf="bankVlidErrors.account">
+      {{ bankVlidErrors.account }}
+    </p>
+    <p>{{ "BIND_BANK_CARD.ADD.FORM.BANK_ACCOUNT_CHECK" | translate }}</p>
+    <input type="text" required formControlName="confirmAccount" />
+    <p class="err" *ngIf="bankVlidErrors.confirmAccount">
+      {{ bankVlidErrors.confirmAccount }}
+    </p>
+    <span>{{ "BIND_BANK_CARD.ADD.FORM.NOTICE" | translate }}</span>
+    <button
+      class="orange_btn btn-commit"
+      type="button"
+      appThrottle
+      (action)="addBank(addBankForm)"
+      [disabled]="addBankForm.invalid || locked"
+    >
+      {{ "COMMON.CONFIRM" | translate }}
+    </button>
+  </form>
+</div>

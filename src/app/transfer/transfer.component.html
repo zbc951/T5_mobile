@@ -1,0 +1,219 @@
+<div
+  style="
+    background-color: #f8f8f8;
+    padding: 8px 0 10px;
+    min-height: calc(100vh - 45px - 47px);
+  "
+>
+  <div
+    class="wallet panel-style"
+    [ngStyle]="{ display: isActivityWallet ? 'flex' : 'static' }"
+  >
+    <div>
+      <div class="title">
+        <div style="display: flex; align-items: center">
+          <p>{{ "TRANSFER.CENTER-WALLET" | translate }}</p>
+          <i appThrottle (action)="refreshAll()"></i>
+        </div>
+        <button
+          *ngIf="isActivityWallet"
+          class="orange_btn"
+          (click)="unmountActivityWallet()"
+          style="position: relative; left: -3px"
+        >
+          {{ "TRANSFER.RECEIVE" | translate }}
+        </button>
+        <button
+          *ngIf="!isActivityWallet"
+          class="orange_btn"
+          (click)="clickBackAll()"
+          [disabled]="locked"
+        >
+          {{ "TRANSFER.RECEIVE" | translate }}
+        </button>
+      </div>
+      <div class="amount">${{ user.money | floatDisplay }}</div>
+    </div>
+    <div *ngIf="isActivityWallet">
+      <div class="title">
+        <div style="display: flex; align-items: center">
+          <p>{{ "MY-WALLET.TOTAL.COUPON" | translate }}</p>
+        </div>
+      </div>
+      <div class="amount">${{ walletSumup | floatDisplay }}</div>
+    </div>
+  </div>
+
+  <!-- isActivityWallet -->
+  <!-- <div class="operate white-bg" *ngIf="isActivityWallet; else elsebox">
+    <form
+      style="margin: 0 0 25px"
+      [formGroup]="transferform"
+      appThrottle
+      (action)="transferPlatforms()"
+    >
+      <div style="position: relative">
+        <select formControlName="wallet">
+          <option value="">
+            {{ "MEMBER_NAV.MULTIMONEY" | translate }}
+          </option>
+          <option value="{{ item.id }}" *ngFor="let item of couponWallets">
+            {{ item.name }} - ${{ item.currentPoints }}
+          </option>
+        </select>
+        <i>
+          {{ "WALLET" | translate }}
+        </i>
+      </div>
+      <div style="position: relative">
+        <select formControlName="platform">
+          <option value="-1" disabled selected>
+            {{ "PLEASE-CHOSE" | translate }}
+          </option>
+          <option
+            [ngValue]="item"
+            *ngFor="let item of platforms"
+            [disabled]="item.maintain"
+          >
+            {{ item.name }}
+          </option>
+        </select>
+        <i>
+          {{ "BET_LOG.PLATFORM" | translate }}
+        </i>
+      </div>
+
+      <div class="btns-wrap flex">
+        <button class="orange_btn">
+          {{ "PFTRANSITION.CONFIRM" | translate }}
+        </button>
+        <button
+          class="orange_btn"
+          appThrottle
+          (action)="unmountActivityWallet()"
+        >
+          {{ "TRANSFER.RECEIVE" | translate }}
+        </button>
+      </div>
+    </form>
+    <form [formGroup]="transferBackform" appThrottle (action)="unmount()">
+      <div style="position: relative">
+        <select formControlName="item">
+
+          <option value="-1" disabled selected>
+            {{ "PLEASE-CHOSE" | translate }}
+          </option>
+          <option
+            [ngValue]="item.id"
+            *ngFor="let item of platformsWithWallet"
+            [disabled]="item.maintain"
+          >
+            {{ item.platform.name }}
+          </option>
+        </select>
+        <i>
+          {{ "BET_LOG.PLATFORM" | translate }}
+        </i>
+      </div>
+      <div style="position: relative">
+        <input
+          type="text"
+          formControlName="wallet"
+          style="padding: 0 0 0 52px"
+        />
+        <i>
+          {{ "WALLET" | translate }}
+        </i>
+      </div>
+
+      <button
+        class="orange_btn"
+        [disabled]="transferBackform.get('item').value == -1"
+      >
+        {{ "PFTRANSITION.CONFIRM" | translate }}
+      </button>
+    </form>
+  </div> -->
+
+  <!-- else -->
+  <!-- <ng-template #elsebox> -->
+    <div class="operate white-bg">
+      <form [formGroup]="transferform" appThrottle (action)="transfer()">
+        <div style="position: relative">
+          <select formControlName="select1">
+            <option [value]="centerWalletValue">
+              {{ "MEMBER_NAV.MULTIMONEY" | translate }}
+            </option>
+            <option
+              [value]="item.key"
+              *ngFor="let item of select1_options"
+              [disabled]="item.maintain"
+            >
+              {{ item.name }}
+            </option>
+          </select>
+          <i>
+            {{ "TRANSFER.from" | translate }}
+          </i>
+        </div>
+        <div style="position: relative">
+          <select formControlName="select2">
+            <option value="-1" disabled selected>
+              {{ "PLEASE-CHOSE" | translate }}
+            </option>
+            <option
+              [value]="item.key"
+              *ngFor="let item of select2_options"
+              [disabled]="item.maintain"
+            >
+              {{ item.name }}
+            </option>
+          </select>
+          <i>
+            {{ "TRANSFER.to" | translate }}
+          </i>
+        </div>
+        <input
+          type="number"
+          placeholder="{{ 'TRANSFER.placeholder' | translate }}"
+          min="100"
+          formControlName="amount"
+        />
+        <button
+          class="orange_btn confirm"
+          [disabled]="transferform.get('amount').value <= 0 || locked"
+        >
+          {{ "PFTRANSITION.CONFIRM" | translate }}
+        </button>
+        <p class="err" *ngIf="locked">
+          {{ "PFTRANSITION.LOCKED" | translate }}
+        </p>
+      </form>
+    </div>
+  <!-- </ng-template> -->
+  <div class="btn-group" *ngIf="isActivityWallet">
+    <button
+      (click)="typeChange(WalletType.COUPON)"
+      [ngClass]="{ active: curWalletType === WalletType.COUPON }"
+    >
+      {{ "MY-WALLET.COUPON-PAGE-TITLE" | translate }}
+    </button>
+    <button
+      (click)="typeChange(WalletType.PLATFORM)"
+      [ngClass]="{ active: curWalletType === WalletType.PLATFORM }"
+    >
+      {{ "MY-WALLET.PLATFORM-PAGE-TITLE" | translate }}
+    </button>
+  </div>
+  <div class="white-bg">
+    <app-platform-wallet
+      *ngIf="curWalletType === WalletType.PLATFORM"
+      [type]="type"
+    ></app-platform-wallet>
+    <app-coupon-wallet
+      *ngIf="curWalletType === WalletType.COUPON"
+      [type]="type"
+    ></app-coupon-wallet>
+  </div>
+</div>
+<app-loading *ngIf="isLoading"></app-loading>

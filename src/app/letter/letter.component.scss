@@ -1,0 +1,258 @@
+.class {
+  background: #fff;
+
+  a {
+    display: inline-block;
+    text-align: center;
+    height: 41px;
+    line-height: 38px;
+    width: 50vw;
+
+    &:link {
+      font-size: 13px;
+      color: #000;
+    }
+
+    &.active {
+      border-bottom: 2px solid #b9a889;
+    }
+  }
+}
+
+.sub_class {
+  height: 62px;
+  width: 100vw;
+  font-size: 13px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  background-color: #f8f8f8;
+
+  span {
+    width: 174px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 13px;
+    color: #fff;
+    background-color: #ccc;
+
+    &.active {
+      background: linear-gradient(#efe3ad, #c7a56d);
+    }
+
+    &:nth-child(1) {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+
+    &:nth-child(2) {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+  }
+}
+
+.announce-tabs {
+  width: calc(100vw - 20px);
+  justify-content: center;
+  border-radius: 7px;
+  overflow: hidden;
+
+  li {
+    width: 33%;
+    height: 42px;
+    line-height: 42px;
+    background: #ccc;
+    // outline: 1px solid pink;
+
+    &.active {
+      background: linear-gradient(#efe3ad, #c7a56d);
+    }
+  }
+}
+
+.radius {
+  display: inline-block;
+  border: solid #cacaca 1px;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+
+  &.active {
+    background-color: #3d4cce;
+  }
+}
+
+.btn_list {
+  justify-content: space-between;
+  padding: 16px;
+
+  a {
+    display: inline-block;
+    width: 82px;
+    height: 29px;
+    line-height: 26px;
+    border: solid #cfa678 1px;
+    color: #cfa678;
+    font-size: 13px;
+    text-align: center;
+    font-weight: 900;
+    border-radius: 5px;
+
+    &:active {
+      opacity: 0.8;
+    }
+  }
+
+  .all {
+    display: inline-flex;
+    align-items: center;
+    color: #808080;
+
+    .radio {
+      margin-right: 10px;
+    }
+  }
+}
+
+.modify {
+  a:nth-child(1) {
+    border-color: #4cb816;
+    color: #4cb816;
+    margin-right: 5px;
+  }
+
+  a:nth-child(2) {
+    border-color: #ed1c24;
+    color: #ed1c24;
+  }
+}
+
+.whiteSpace {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100px;
+}
+
+.list {
+  height: calc(100vh - 45px - 47px - 41px - 62px);
+  overflow: scroll;
+
+  li {
+    padding: 15px;
+    border-bottom: solid #c7a46c 1px;
+    align-items: center;
+    display: flex;
+    background: #fff;
+    width: 90%;
+    margin: 0px auto 15px;
+    border: solid 1px #ab8b51;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px #c3c3c3;
+
+    &.read {
+      background-color: #e6e6e6;
+      box-shadow: none;
+      border-color: #bfbfbf;
+
+      .title,.msg {
+        color: #929292;
+      }
+    }
+
+    div {
+      width: calc(100vw - 47px);
+    }
+
+    .radio {
+      // width: 4%;
+      width: 19px;
+      height: 19px;
+      // outline: 1px solid pink;
+      // text-align: center;
+      // padding: 0 0 0 5px;
+      input {
+        vertical-align: middle;
+        padding: 0;
+        // outline: 1px solid red;
+      }
+    }
+
+    .title {
+      @extend .whiteSpace;
+      padding-left: 10px;
+      width: calc(100vw - 146px);
+      font-size: 18px;
+      color: #000;
+    }
+
+    .msg {
+      @extend .whiteSpace;
+      padding-left: 10px;
+      width: calc(100vw - 96px);
+      font-size: 15px;
+      color: #b7975d;
+    }
+
+    .date {
+      width: 94px;
+      padding-left: 5px;
+      color: #999;
+      font-size: 13px;
+      float: right;
+      // position: relative;
+      // top: -4px;
+    }
+  }
+}
+
+input[type="checkbox"] {
+  // width: 19px;
+  // height: 19px;
+  // border-radius: 50%;
+  position: relative;
+
+  &:after {
+    display: block;
+    content: "";
+    width: 19px;
+    height: 19px;
+    position: relative;
+    top: calc(50% - 10px);
+    left: calc(50% - 10px);
+    background: #fff;
+    // visibility: visible;
+    border-radius: 50%;
+    border: 2px solid #ececee;
+  }
+
+  &:checked {
+    &:before {
+      display: block;
+      content: "";
+      width: 19px;
+      height: 19px;
+      position: relative;
+      top: calc(50% - 10px);
+      left: calc(50% - 10px);
+      background: #fff;
+      border-radius: 50%;
+      border: 2px solid #ececee;
+    }
+
+    &:after {
+      display: block;
+      content: "";
+      width: 12px;
+      height: 12px;
+      position: absolute;
+      top: calc(50% - 6px);
+      left: calc(50% - 6px);
+      background: #3d4cce;
+      border-radius: 50px;
+    }
+  }
+}

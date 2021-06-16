@@ -1,0 +1,77 @@
+.dialog {
+  width: 87.2vw;
+
+  .title {
+    height: 45px;
+  }
+}
+
+.err {
+  position: absolute;
+  top: 9.87vw;
+}
+
+input {
+  width: 77.6vw;
+  height: 9.87vw;
+  margin-top: 19px;
+}
+
+.cnt {
+  padding: 10px 0;
+  text-align: center;
+
+  li {
+    width: 100%;
+    height: 60px;
+
+    .err {
+      top: 60px;
+      padding: 0;
+    }
+  }
+}
+
+button {
+  background: none;
+  letter-spacing: 1px;
+}
+
+.code-btn {
+  // width: 120px;
+
+  height: 28px;
+  padding: 0 5px;
+
+  font-size: 14px;
+
+  position: absolute;
+  top: calc(50% - 5px);
+  right: 7vw;
+  border-radius: 3px;
+
+  color: #cfa678;
+  border: 1px solid currentColor;
+}
+
+.btn {
+  text-align: center;
+  button {
+    width: 77.6vw;
+    height: 11.2vw;
+    margin: 3vw 0;
+
+    color: #fff;
+    border: 1px solid #cca172;
+    border-radius: 3px;
+    background: linear-gradient(#f1d7b7 0%, #cca172 50%, #f1c999 100%);
+  }
+}
+
+.tips {
+  font-size: 16px;
+  padding: 0;
+  margin: 20px;
+  text-align: center;
+  color: #ff2e2e;
+}

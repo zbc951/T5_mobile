@@ -1,0 +1,60 @@
+<div class="host drawback">
+  <div class="panel">
+    <div class="header">
+      <p class="title">{{ "MEMBER_WITHDRAW.drawback_title" | translate }}</p>
+      <p class="no">
+        {{ "MEMBER_WITHDRAW.record_th.no" | translate }} {{ serial_num }}
+      </p>
+      <button class="close-btn" (click)="close()"></button>
+    </div>
+    <div class="cnt">
+      <div class="table">
+        <ul
+          *ngFor="
+            let item of records
+              | paginate
+                : {
+                    itemsPerPage: itemsPerPage,
+                    currentPage: currentPage,
+                    totalItems: totalItems
+                  }
+          "
+        >
+          <li class="header" style="display: none">
+            <!-- <p>19149837</p> -->
+          </li>
+          <li>
+            <p>{{ "MEMBER_WITHDRAW.record_th.status" | translate }}</p>
+            <p>{{ translationsRecordType[item.type] }}</p>
+          </li>
+
+          <li>
+            <p>{{ "MEMBER_QUEST.AMOUNT" | translate }}</p>
+            <p class="wShift">{{ item.money }}</p>
+          </li>
+          <li>
+            <p>{{ "MEMBER_RECORD.DATE" | translate }}</p>
+            <p>{{ item.createdAt }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="page-block">
+      <pagination-controls
+        (pageChange)="pageChanged($event)"
+        class="pagination"
+        autoHide="true"
+        previousLabel=""
+        nextLabel=""
+        id="drawback"
+      >
+      </pagination-controls>
+      <p>
+        {{
+          "PAGEINFO"
+            | translate: { totalItems: totalItems, itemsPerPage: itemsPerPage }
+        }}
+      </p>
+    </div>
+  </div>
+</div>

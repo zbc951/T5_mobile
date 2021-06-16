@@ -1,0 +1,112 @@
+<div
+  style="
+    background-color: #f8f8f8;
+    padding: 0 0 10px;
+    min-height: calc(100vh - 45px - 47px);
+  "
+>
+  <div class="wallet white-bg">
+    <div class="gradient">
+      <div class="content panel-style">
+        <div class="content-title">
+          {{ "WITHDRAW.AMOUNT.CENTER" | translate }}
+          <!-- <i (click)="refresh()"></i> -->
+          <i appThrottle (action)="refresh()"></i>
+        </div>
+        ${{ user.money | floatDisplay }}
+      </div>
+      <div class="row">
+        {{ "WITHDRAW.AMOUNT.UNLOCK" | translate }}
+        <p>${{ ableMoney | floatDisplay }}</p>
+      </div>
+
+      <div class="row2">
+        <div class="row">
+          {{ "MY-WALLET.ABLE.LOCK" | translate }}
+          <p><span>$</span>{{ user.wallet?.locked_amount | floatDisplay }}</p>
+        </div>
+        <button class="orange_btn goAmount-btn" (click)="goAmountRecord()">
+          {{ "MEMBER_WITHDRAW.record" | translate }}
+        </button>
+      </div>
+    </div>
+    <button class="chk" (click)="walletOpen()">
+      {{ "WITHDRAW.WALLET-DETAIL2" | translate }}
+      <i></i>
+    </button>
+    <app-platform-wallet *ngIf="isOpen" [type]="type"></app-platform-wallet>
+  </div>
+  <div class="operate white-bg">
+    <div class="operate-notice">
+      {{
+        "WITHDRAW.NOTICE2"
+          | translate
+            : {
+                num: limit.numTxt,
+                amount: limit.amountTxt,
+                height:
+                  limit.withdrawMaxPer == 0
+                    ? ("MEMBER_WITHDRAW.NO_LIMIT" | translate)
+                    : limit.withdrawMaxPer,
+                min: limit.withdrawMinPer
+              }
+      }}; {{ "VIP.fee." + mylv?.withdrawFeePeriod | translate
+      }}{{ "VIP.fee.free" | translate }}
+      {{
+        mylv?.withdrawFreeTimes == 0
+          ? ("MEMBER_WITHDRAW.NO_LIMIT" | translate)
+          : (mylv?.withdrawFreeTimes | floatDisplay)
+      }}
+    </div>
+    <!-- <form [formGroup]="form" (ngSubmit)="withdraw(form)"> -->
+    <form [formGroup]="form" appThrottle (action)="withdraw(form)">
+      <select formControlName="memberBankId">
+        <option value="{{ item.id }}" *ngFor="let item of banks">
+          {{ item.bankName }}
+          <span *ngIf="item.branchName"> - {{ item.branchName }}</span>
+        </option>
+      </select>
+      <div class="tail">
+        {{ "DEPOSIT.BOTTOM.TAIL" | translate }}:
+        <!-- <p>{{ bank?.account | slice: -4 }}</p> -->
+        <p>{{ bankTail }}</p>
+      </div>
+      <input
+        type="number"
+        placeholder="{{ 'MEMBER_WITHDRAW.MONEY-notice' | translate }}"
+        appNumberOnly
+        formControlName="money"
+        style="margin: 30px auto 0"
+      />
+      <!-- <input
+        *ngIf="!lastWithdraw"
+        type="password"
+        placeholder="{{ 'MEMBER_WITHDRAW.PWD-notice' | translate }}"
+        formControlName="password"
+      /> -->
+      <button
+        class="orange_btn"
+        [disabled]="!ctrlBankid.value || form.invalid || lastWithdraw"
+        [class.review]="lastWithdraw"
+      >
+        {{
+          lastWithdraw
+            ? ("MEMBER_WITHDRAW.APPLYING" | translate)
+            : ("DEPOSIT.BOTTOM.ATM-TRANS.SUBMIT" | translate)
+        }}
+      </button>
+    </form>
+  </div>
+  <div class="notice">
+    <div class="notice-title">
+      {{ "DEPOSIT.BOTTOM.ATM-TRANS.DISCRIPTION.TITLE" | translate }}
+    </div>
+
+    <div innerHTML="{{ 'WITHDRAW.DISCRIPTION.1' | translate }}"></div>
+    <div innerHTML="{{ 'WITHDRAW.DISCRIPTION.2' | translate }}"></div>
+    <div
+      style="color: #e11515"
+      innerHTML="{{ 'WITHDRAW.DISCRIPTION.PS' | translate }}"
+    ></div>
+  </div>
+</div>

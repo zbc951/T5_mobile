@@ -1,0 +1,87 @@
+<div class="header">
+  <!-- type1 -->
+  <div class="content" *ngIf="headerService.curType === 1">
+    <i class="logo" [hidden]="noLogo" ></i>
+  </div>
+
+  <!-- type2 -->
+  <div class="content content2" *ngIf="headerService.curType === 2">
+    <i class="arrow" (click)="headerService.goBack()"></i>
+    <div class="title">{{ title }}</div>
+  </div>
+
+  <!-- type3 -->
+  <div class="content content2" *ngIf="headerService.curType === 3">
+    <i class="arrow" (click)="headerService.goBack()"></i>
+    <div class="title">{{ title }}</div>
+    <button
+      *ngIf="
+        headerService.route === AppRoutes.DEPOSIT ||
+        headerService.route === AppRoutes.WITHDRAWAL ||
+        headerService.route === AppRoutes.TRANSFER
+      "
+      (click)="headerService.goTeach()"
+    >
+      {{ "TEACH" | translate }}
+    </button>
+
+    <button
+      class="vip_btn"
+      *ngIf="headerService.route === AppRoutes.VIP"
+      (click)="headerService.goVipDetail()"
+    >
+      {{ "VIP.chk_vip_detail2" | translate }}
+    </button>
+  </div>
+
+  <!-- type4 -->
+  <div class="content content2" *ngIf="headerService.curType === 4">
+    <i class="arrow" (click)="headerService.goBack()"></i>
+    <div class="title">{{ title }}</div>
+    <ng-container [ngSwitch]="actionNow">
+      <ng-container *ngSwitchCase="actions.LetterEdit">
+        <i class="edit" (click)="letterEdit()"></i>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="actions.LetterDone">
+        <button (click)="letterEditDone()">
+          {{ "LETTER.ok" | translate }}
+        </button>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="actions.LetterDetailShowDelet">
+        <!-- <button (click)="letterDelet()"> -->
+        <button appThrottle (action)="letterDelet()">
+          {{ "LETTER.DEL" | translate }}
+        </button>
+      </ng-container>
+
+      <!-- <ng-container *ngSwitchDefault></ng-container> -->
+    </ng-container>
+  </div>
+
+  <!-- type5 -->
+  <div class="content content2" *ngIf="headerService.curType === 5">
+    <i class="arrow" (click)="headerService.goBack()"></i>
+    <div class="title">{{ title }}</div>
+    <!-- <i class="refresh" (click)="refreshMywallet()"></i> -->
+    <i class="refresh" appThrottle (action)="refreshMywallet()"></i>
+  </div>
+
+  <!-- type6 -->
+  <div class="content content2" *ngIf="headerService.curType === 6">
+    <div class="title">{{ title }}</div>
+  </div>
+
+  <!-- type7 -->
+  <div class="content content2" *ngIf="headerService.curType === 7">
+    <i class="arrow" (click)="headerService.goHelpBack()"></i>
+    <div class="title">{{ title }}</div>
+  </div>
+
+  <!-- type8 -->
+  <div class="content content2" *ngIf="headerService.curType === 8">
+    <i class="arrow" (click)="headerService.newHelpGoBack()"></i>
+    <div class="title">{{ title }}</div>
+  </div>
+</div>

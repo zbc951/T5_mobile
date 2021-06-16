@@ -1,0 +1,124 @@
+<div class="scroll-wrap" appList (gotBottom)="onBtm($event)">
+  <div class="operate white-bg">
+    <div style="display: flex">
+      <div class="helf">
+        <p>{{ "BET_LOG.ACCOUNT" | translate }}</p>
+        <button (click)="walletChoose(curWallet)">
+          {{ curWallet.item.name }}
+          <i></i>
+        </button>
+      </div>
+      <div class="helf">
+        <p>{{ "BET_LOG.PLATFORM" | translate }}</p>
+        <button (click)="platformChoose(curPlatform)">
+          {{ curPlatform.item.name }}
+          <i></i>
+        </button>
+      </div>
+    </div>
+    <div class="date">
+      <!-- <form [formGroup]="form" (ngSubmit)="queryBet()"> -->
+      <form [formGroup]="form" appThrottle (action)="queryBet()">
+        <ul>
+          <li>
+            <p>{{ "MEMBER_RECORD.SELECT" | translate }}</p>
+            <div class="date-selector">
+              <input type="date" formControlName="startTime" />
+              <span>~</span>
+              <input type="date" formControlName="endTime" />
+              <!-- <div><i></i></div> -->
+            </div>
+          </li>
+          <li>
+            <app-date-selector (timeEvt)="setTime($event)"></app-date-selector>
+          </li>
+          <li>
+            <button class="btn-confirm orange_btn">
+              {{ "DEPOSIT.BOTTOM.ATM-TRANS.SUBMIT" | translate }}
+            </button>
+          </li>
+        </ul>
+      </form>
+    </div>
+  </div>
+  <div class="total" *ngIf="pageConfig.totalItems">
+    <i></i>
+    {{
+      "BET_LOG.TOTAL2"
+        | translate
+          : {
+              num: pageConfig.totalItems,
+              bet: sumTotal?.betAmount,
+              win: sumTotal?.resultAmount
+            }
+    }}
+  </div>
+  <ul class="logs">
+    <div class="empty-data" *ngIf="pageConfig.totalItems === 0">
+      {{ "NO_DATA" | translate }}
+    </div>
+    <div *ngFor="let item of betRecord; let i = index" class="cnt panel-style">
+      <h3 class="title">{{ item.platformName }}</h3>
+      <ul class="data">
+        <li>
+          <p>{{ "MEMBER_RECORD.betAmount" | translate }}</p>
+          <p>{{ item.betAmount }}</p>
+        </li>
+        <li>
+          <p>{{ "MEMBER_RECORD.validAmount" | translate }}</p>
+          <p>{{ item.validAmount }}</p>
+        </li>
+        <li>
+          <p>{{ "MEMBER_RECORD.tip" | translate }}</p>
+          <p>{{ item.tip }}</p>
+        </li>
+        <li>
+          <p>{{ "MEMBER_RECORD.result" | translate }}</p>
+          <p class="result">{{ item.resultAmount }}</p>
+        </li>
+      </ul>
+      <div
+        class="detail-wrap"
+        [class.isOpen]="item.isOpen"
+        appList
+        (gotBottom)="onDetailBtm($event)"
+      >
+        <div class="details panel-style" *ngFor="let item of betDetails">
+          <h3 class="title">
+            <span>{{ item.gameName }}</span>
+            <span class="date">{{ item.betAt }}</span>
+          </h3>
+          <ul class="detail-data">
+            <li>
+              <p>{{ "MEMBER_RECORD.NO" | translate }}</p>
+              <p>{{ item.id }}</p>
+            </li>
+            <li>
+              <p>{{ "MEMBER_RECORD.betAmount" | translate }}</p>
+              <p>{{ item.amount }}</p>
+            </li>
+            <li>
+              <p>{{ "MEMBER_RECORD.validAmount" | translate }}</p>
+              <p>{{ item.validAmount }}</p>
+            </li>
+            <li>
+              <p>{{ "MEMBER_RECORD.tip" | translate }}</p>
+              <p>{{ item.tip }}</p>
+            </li>
+            <li>
+              <p>{{ "MEMBER_RECORD.result" | translate }}</p>
+              <p class="result">{{ item.resultAmount }}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <button (click)="getBetDetail(i, item)">
+        {{ "TRANSFER.OPEN" | translate }}<i [class.isOpen]="item.isOpen"></i>
+      </button>
+    </div>
+  </ul>
+  <p class="no-data" *ngIf="pageConfig.totalItems.length === 0">
+    {{ "NO_DATA" | translate }}
+  </p>
+</div>
+<app-select-alert></app-select-alert>

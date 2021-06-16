@@ -1,0 +1,46 @@
+<div class="mask" (click)="close()">
+  <div class="dialog" (click)="$event.cancelBubble = true">
+    <div class="title">
+      <div class="icon"></div>
+      <p>{{ "NAV.ANNOUNCE" | translate }}</p>
+      <i (click)="close()"></i>
+    </div>
+    <ul class="types">
+      <li
+        [ngClass]="{ active: navType === MarqueeType.Normal }"
+        (click)="selectNavtype(MarqueeType.Normal)"
+      >
+        <p>
+          <span>{{ "BULLETIN.NORMAL" | translate }}</span>
+        </p>
+      </li>
+      <li
+        [ngClass]="{ active: navType === MarqueeType.Hot }"
+        (click)="selectNavtype(MarqueeType.Hot)"
+      >
+        <p>
+          <span>{{ "BULLETIN.HOT" | translate }}</span>
+        </p>
+      </li>
+      <li
+        *ngIf="isLogin"
+        [ngClass]="{ active: navType === MarqueeType.deposit }"
+        (click)="selectNavtype(MarqueeType.deposit)"
+      >
+        <p>
+          <span>{{ "BULLETIN.DEPOSIT" | translate }}</span>
+        </p>
+      </li>
+    </ul>
+    <ul class="announcement">
+      <li *ngFor="let item of newsList | bulletin: navType; let i = index">
+        <div class="date">
+          {{ item.startTime | date: "YYYY/MM/DD HH:mm:ss" }}
+        </div>
+        <div class="content">
+          {{ item.content }}
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,163 @@
+<div class="mask">
+  <div class="dialog">
+    <div class="title">
+      <div class="icon"></div>
+      <p *ngIf="!success">{{ "REGISTER.POPUP-TITLE" | translate }}</p>
+      <p *ngIf="success">{{ "REGISTER.SUCCESS" | translate }}</p>
+      <i (click)="close()"></i>
+    </div>
+    <!-- (ngSubmit)="register(registerForm)" -->
+    <form
+      *ngIf="!success"
+      [formGroup]="registerForm"
+      appThrottle
+      (action)="register(registerForm)"
+    >
+      <label for="">
+        <input
+          type="text"
+          placeholder="{{ placeholder.account }}"
+          formControlName="account"
+        />
+        <p class="err" *ngIf="!invalidErrors.account">
+          {{ "REGISTER.tips.ACCOUNT" | translate }}
+        </p>
+        <p class="err" *ngIf="invalidErrors.account">
+          {{ invalidErrors.account }}
+        </p>
+      </label>
+
+      <label for="" class="pass-label">
+        <input
+          [type]="inputType"
+          placeholder="{{ placeholder.password }}"
+          formControlName="password"
+        />
+        <img
+          src="assets/img/eye.svg"
+          alt=""
+          *ngIf="isPassword"
+          (click)="passwordChange(false)"
+        />
+        <img
+          src="assets/img/eye2.svg"
+          alt=""
+          *ngIf="!isPassword"
+          (click)="passwordChange(true)"
+        />
+        <p class="err" *ngIf="!invalidErrors.password">
+          {{ "REGISTER.tips.PASSWORD" | translate }}
+        </p>
+        <p class="err" *ngIf="invalidErrors.password">
+          {{ invalidErrors.password }}
+        </p>
+      </label>
+      <label for="">
+        <input
+          type="password"
+          placeholder="{{ placeholder.passwordConfirm }}"
+          formControlName="checkPassword"
+        />
+        <p class="err" *ngIf="invalidErrors.checkPassword">
+          {{ "REGISTER.ERR.CONFIRM" | translate }}
+        </p>
+      </label>
+      <label for="">
+        <input
+          type="text"
+          placeholder="{{ placeholder.invitationCode }}"
+          formControlName="code"
+          [readonly]="isInvit"
+        />
+        <p class="tips">
+          {{ "REGISTER.ERR.INVATION" | translate }}
+        </p>
+        <p class="err" *ngIf="invalidErrors.code">
+          {{ invalidErrors.code }}
+        </p>
+      </label>
+      <label for="" class="phone">
+        <input
+          type="text"
+          placeholder="{{ placeholder.phone }}"
+          formControlName="phone"
+        />
+        <button
+          *ngIf="!isPhoneConfirm"
+          type="button"
+          (click)="getSmsCode()"
+          class="white_orange_btn"
+        >
+          {{ "MEMBER_INFO.SEND_CODE" | translate }}
+        </button>
+        <!-- <p class="confirm" *ngIf="isPhoneConfirm">
+          {{ "REGISTER.ISCONFIRM" | translate }}
+        </p> -->
+        <p class="err" *ngIf="invalidErrors.phone">
+          {{ "REGISTER.ERR.PHONE-ERR" | translate }}
+        </p>
+      </label>
+      <label for="" class="phone-confirm">
+        <input
+          type="text"
+          placeholder="{{ placeholder.phoneConfirm }}"
+          formControlName="smsCode"
+        />
+        <button
+          *ngIf="!isPhoneConfirm"
+          type="button"
+          (click)="getSmsCode()"
+          class="phoneConfirm orange_btn"
+        >
+          {{ "REGISTER.send" | translate }}
+        </button>
+        <!-- <img
+          src="assets/img/hook.svg"
+          alt=""
+          *ngIf="isPhoneConfirm"
+        /> -->
+        <p class="err" *ngIf="invalidErrors.smsCode">
+          {{ "REGISTER.ERR.PHONE-CONFIRM-ERR" | translate }}
+        </p>
+      </label>
+      <label for="ischeck" class="isCheck">
+        <input
+          type="checkbox"
+          id="ischeck"
+          required
+          formControlName="isCheck"
+        />
+        {{ "REGISTER.ISCHECK1" | translate }}
+        <p (click)="openTerms()">
+          {{ "REGISTER.ISCHECK2" | translate }}
+        </p>
+      </label>
+
+      <!-- debug -->
+      <!-- <p style="font-size: 12px;">
+        {{ debugtxt }}
+        {{ tmpInvitation }}
+        {{ debugcopy | json }}
+      </p> -->
+
+      <button type="submit" class="orange_btn">
+        {{ "MEMBER_INFO.CONFIRM" | translate }}
+      </button>
+    </form>
+
+    <div class="success" *ngIf="success">
+      <div class="icon"></div>
+      <p>
+        {{ "REGISTER.SUCCESS-DISCRIPTION" | translate }}
+      </p>
+      <div class="btn-group">
+        <button class="blue_btn" routerLink="/{{ AppRoutes.DEPOSIT }}">
+          {{ "REGISTER.GODEPOSIT" | translate }}
+        </button>
+        <button class="orange_btn" (click)="goHome()">
+          {{ "REGISTER.INTO" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
